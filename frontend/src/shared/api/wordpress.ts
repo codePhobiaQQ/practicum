@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import type { WpCoursePost } from '@shared/types/wordpress-course'
+import type { WpCoursePost, WpTaxonomyTerm } from '@shared/types/wordpress-course'
 
 function getBaseUrl(): string {
   const raw = import.meta.env.VITE_WORDPRESS_URL as string | undefined
@@ -31,13 +31,69 @@ export async function fetchCourses(perPage = 50): Promise<WpCoursePost[]> {
   return data
 }
 
-export async function fetchCourseBySlug(slug: string): Promise<WpCoursePost | null> {
+/** Ищет курс по `acf.slug` среди страниц ответа (без учёта регистра). */
+async function fetchCourseByAcfSlug(routeSlug: string): Promise<WpCoursePost | null> {
+  const q = routeSlug.trim().toLowerCase()
+  if (!q) {
+    return null
+  }
+  let page = 1
+  const perPage = 100
+  const maxPages = 20
+  while (page <= maxPages) {
+    const { data } = await client.get<WpCoursePost[]>('/course', {
+      params: {
+        per_page: perPage,
+        page,
+        orderby: 'date',
+        order: 'desc',
+        _embed: true,
+      },
+    })
+    if (!data.length) {
+      break
+    }
+    const found = data.find((p) => p.acf?.slug?.trim().toLowerCase() === q)
+    if (found) {
+      return found
+    }
+    if (data.length < perPage) {
+      break
+    }
+    page += 1
+  }
+  return null
+}
+
+/**
+ * Курс по сегменту URL `/courses/:slug`.
+ * Сначала запрос по slug записи WP (`?slug=`), затем по полю ACF `slug` (перебор страниц списка).
+ */
+export async function fetchCourseBySlug(routeSlug: string): Promise<WpCoursePost | null> {
+  const q = routeSlug.trim()
+  if (!q) {
+    return null
+  }
   const { data } = await client.get<WpCoursePost[]>('/course', {
     params: {
-      slug,
+      slug: q,
       per_page: 1,
       _embed: true,
     },
   })
-  return data[0] ?? null
+  if (data[0]) {
+    return data[0]
+  }
+  return fetchCourseByAcfSlug(q)
+}
+
+/** Термины таксономии WP REST (`cource-category`, `cource-subject`, …). */
+export async function fetchTaxonomyTerms(taxonomy: string, perPage = 100): Promise<WpTaxonomyTerm[]> {
+  const { data } = await client.get<WpTaxonomyTerm[]>(`/${taxonomy}`, {
+    params: {
+      per_page: perPage,
+      hide_empty: false,
+    },
+  })
+  return data
 }

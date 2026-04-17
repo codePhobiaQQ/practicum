@@ -65,7 +65,7 @@ export function MaterialBlock({ block, index }: { block: MaterialRow; index: num
           Видео {index + 1}
         </Title>
         {isYoutube(url) ? (
-          <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
+          <div className="aspect-video w-full overflow-hidden rounded-lg bg-light-border">
             <iframe
               title="video"
               src={toYoutubeEmbed(url)}

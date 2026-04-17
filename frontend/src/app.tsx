@@ -3,7 +3,7 @@ import { routes } from '@app/routes'
 import { PersonalAccountLayout } from '@/app/layouts/personal-account-layout'
 import { AuthOnly } from '@app/providers'
 import { Suspense } from 'react'
-import { PageLoader } from '@/shared/components/loaders/PageLoader/PageLoader'
+import { PageLoader } from '@shared/components/loaders/PageLoader/PageLoader'
 import '@shared/styles/index.scss'
 
 const RoutesItems = routes.map((route) => {
