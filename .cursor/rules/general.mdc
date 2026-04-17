@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+- You can paste this into User Rules:
+- Avoid high‑level answers. Your goal is to provide a concrete solution directly applicable to this project.
+- Avoid detailed explanations. Briefly explain only why you are making each change.
+- Before making changes, describe a plan. First outline a step‑by‑step implementation plan, then execute it.
+- Respect linters. When writing code, follow the project’s linting and formatting rules.
+- Write as little code as possible. Propose minimal changes and the simplest working solution, avoiding unnecessary abstractions and edits.

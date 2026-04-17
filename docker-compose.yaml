@@ -1,0 +1,80 @@
+## DEVELOP MODE VERSION
+
+services:
+  #-----------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - "5174:5174"
+    environment:
+      VITE_BACKEND_URL: http://localhost:9091
+      VITE_WORDPRESS_URL: http://localhost:9091
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    networks:
+      - wpsite
+
+  #-----------------------
+
+  db:
+    image: mysql:5.7
+    # platform: linux/amd64
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    networks:
+      - wpsite
+
+  #-----------------------
+  phpmyadmin:
+    # platform: linux/amd64
+    depends_on:
+      - db
+    image: phpmyadmin
+    restart: always
+    ports:
+      - '9001:80'
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
+      UPLOAD_LIMIT: 200M
+    networks:
+      - wpsite
+
+  #-----------------------
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - '9091:80'
+    restart: always
+    volumes:
+      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./wordpress/wp-config.php:/var/www/html/wp-config.php
+      - ./wordpress/.htaccess:/var/www/html/.htaccess
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: admin
+      WORDPRESS_DB_NAME: wordpress
+      WP_HOME: http://localhost:9091
+      WP_SITEURL: http://localhost:9091
+    networks:
+      - wpsite
+
+
+networks:
+  wpsite:
+
+volumes:
+  db_data:

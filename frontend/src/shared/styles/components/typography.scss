@@ -1,0 +1,26 @@
+h1,h2,h3,h4,h5,h6 {
+  &.ant-typography {
+    margin: 0;
+    line-height: 1.2em;
+    font-family: 'monsterat-sb', sans-serif;
+    color: #1F2937;
+  }
+}
+
+h2 {
+  &.ant-typography {
+    font-size: 2.5rem;
+  }
+}
+
+p {
+  color: #1F2937;
+}
+
+a {
+  color: #260C8F;
+  
+  &:hover {
+    color: #1F0D5E;
+  }
+}

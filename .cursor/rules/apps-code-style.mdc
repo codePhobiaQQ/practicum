@@ -1,0 +1,23 @@
+---
+description: Code style and structural conventions for application code in apps/*.
+globs:
+  - *.ts
+  - *.tsx
+  - *.js
+  - *.jsx
+alwaysApply: false
+---
+
+# Apps Code Style
+
+- Treat each directory under `apps/*` as an independent deployable application with its own routing, state, and build config.
+- Keep UI components presentational where possible:
+  - Prefer functional React / React Native components with hooks for side effects and data fetching.
+  - Move complex business logic into hooks or shared packages rather than inline in components.
+- Organize app code by feature rather than by technical layer when it improves cohesion (for example `lib/nft`, `lib/wallet`, `lib/social`).
+- Prefer explicit exports from feature `index.ts` files so other parts of the app import from a single entrypoint instead of deep relative paths.
+- Avoid importing directly from another app (for example `apps/allmint-frontend` should not import from `apps/allmint-admin`); extract shared pieces into `packages/*` instead.
+- Co-locate components with their styles, assets, and tests within the same feature folder when reasonable.
+- Keep environment-specific configuration (URLs, keys, feature flags) in configuration modules, not scattered through components.
+- For cross-cutting concerns (logging, analytics, error boundaries, providers), centralize setup near the app root entry rather than per-component ad hoc usage.
+

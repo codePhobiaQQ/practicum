@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'monsterat';
+  src: url('./../assets/fonts/Montserrat-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'monsterat';
+  src: url('./../assets/fonts/Montserrat-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'monsterat-sb';
+  src: url('./../assets/fonts/Montserrat-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'monsterat-sb';
+  src: url('./../assets/fonts/Montserrat-SemiBoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+
+.m-sb-i {
+  font-family: 'monsterat-sb', sans-serif;
+  font-style: italic;
+}
+
+html {
+  overflow-x: hidden !important;
+}
+
+body {
+  background-color: #FFFFFF;
+  font-family: 'monsterat', sans-serif;
+  color: var(--default-text-color);
+  overflow-x: hidden !important;
+  border-color: var(--border-color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container-custom {
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .container-inner {
+    max-width: 1160px;
+    width: 95%;
+
+    &.container-fluent {
+      width: 100%;
+      max-width: inherit;
+    }
+  }
+
+}
+
+.pointer {
+  cursor: pointer;
+}

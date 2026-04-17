@@ -1,0 +1,58 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+*~
+
+# Environment (keep .env.example tracked)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Node / package managers
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Frontend build (Vite)
+frontend/dist/
+frontend/.vite/
+frontend/node_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing / coverage
+coverage/
+.nyc_output/
+
+# Logs
+logs/
+*.log
+
+# WordPress (runtime & uploads; adjust if you version custom themes/plugins fully)
+wordpress/wp-content/uploads/
+wordpress/wp-content/upgrade/
+wordpress/wp-content/cache/
+wordpress/wp-content/backup*/
+wordpress/wp-content/debug.log
+wordpress/wp-content/*.log
+wordpress/wp-content/.analyst_analyst_cache
+
+# Docker
+.docker/
+
+# Misc
+*.pem
+.cache/

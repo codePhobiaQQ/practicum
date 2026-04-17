@@ -1,0 +1,19 @@
+FROM node:20-alpine
+
+RUN corepack enable && corepack prepare pnpm@8.15.4 --activate
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+WORKDIR /app
+
+EXPOSE 5173
+
+COPY package.json ./
+
+# Optional Rollup native deps often not installed in Docker; add explicitly (npm/pnpm bug)
+RUN pnpm install && \
+  pnpm add -D @rollup/rollup-linux-arm64-gnu @rollup/rollup-linux-x64-gnu
+
+COPY . .
+
+CMD ["pnpm", "run", "dev"]

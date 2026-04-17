@@ -1,0 +1,19 @@
+---
+description: Monorepo structure and module boundary conventions for apps and packages.
+alwaysApply: false
+---
+
+# Monorepo Structure and Boundaries
+
+- `apps/*` contains deployable applications (frontends, services, CLIs, mobile).
+- `packages/*` contains reusable libraries, shared logic, tooling, and configuration.
+- Applications may depend on packages, but **must not** depend on other applications.
+- Packages **must not** import from `apps/*`; all shared logic should live in `packages/*`.
+- When sharing code between apps, extract it into a package under `packages/*` rather than importing across app directories.
+- Keep public APIs explicit:
+  - Each package should expose a clear entry file (for example `src/index.ts`) that re-exports its public surface.
+  - Applications should import from package entrypoints instead of deep internal paths.
+- Avoid circular dependencies between packages and between apps.
+- Prefer small, focused packages with a single responsibility over large grab-bag modules.
+- Use pnpm workspaces and Turbo tasks as defined in the root `package.json` for running scripts (`build`, `dev`, `lint`, etc.) instead of per-package ad-hoc commands.
+

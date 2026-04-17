@@ -1,0 +1,28 @@
+---
+description: Tamagui v2 and MCP Context7 docs for mobile app UI components
+globs:
+  - "**/mobile/**/*.tsx"
+  - "**/mobile/**/*.ts"
+alwaysApply: false
+---
+
+# Mobile UI: Tamagui v2 + Context7
+
+This rule applies when working inside mobile app directories in the monorepo.
+
+## UI library
+
+- Use **Tamagui** and **Tamagui v2** only (e.g. `tamagui@2.x`, `@tamagui/config@2.x`).
+- Import primitives from `tamagui` (e.g. `YStack`, `XStack`, `Text`, `Button`, `Input`, `Sheet`).
+- Use design tokens from `@allmint/tamagui-config` (`defaultTokens`) when styling.
+
+## Creating or changing components
+
+When creating or modifying UI components in mobile code:
+
+1. **Use the MCP server `user-context7`** for up-to-date Tamagui documentation and examples.
+2. **Resolve the library ID first**: call the `resolve-library-id` tool with `libraryName` set to `tamagui` (and a `query` describing the component or pattern).
+3. **Query the docs**: call the `query-docs` tool with the resolved library ID and a specific question (e.g. component API, theming, layout, responsive props).
+4. Prefer patterns and APIs from the Context7 results over guessing or generic web search.
+
+Do not rely on memory or assumptions for Tamagui v2 APIs; always pull current docs from Context7 when implementing or changing components.

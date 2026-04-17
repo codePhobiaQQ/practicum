@@ -1,0 +1,25 @@
+---
+description: Code style and API design conventions for shared packages in packages/*.
+globs:
+  - *.ts
+  - *.tsx
+  - *.js
+  - *.jsx
+alwaysApply: false
+---
+
+# Packages Code Style
+
+- Treat each directory under `packages/*` as a library with a well-defined public API and clear responsibility.
+- Expose a single public entrypoint (for example `src/index.ts`) and avoid importing from internal file paths of other packages.
+- Separate core, UI, and types where appropriate:
+  - Put framework-agnostic logic into `core` or `sdk` style packages.
+  - Put React / React Native bindings into sibling `react` packages.
+  - Put shared type definitions into dedicated `types` packages when they are reused widely.
+- Keep packages free of application-specific concerns (routing, app state containers, environment-specific constants); those belong in `apps/*`.
+- Avoid tight coupling between packages:
+  - Prefer depending on smaller foundational packages instead of reaching into application code.
+  - Prevent circular dependencies by designing clear dependency direction (for example `core` → `react`, never the opposite).
+- Maintain backward-compatible public APIs where possible; when breaking changes are required, document them clearly and version appropriately.
+- Use the shared tooling configuration from `packages/env/*` (ESLint, TypeScript config, etc.) instead of redefining configs per package.
+

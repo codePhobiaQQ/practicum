@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Components
+@import "components/navbar.css";
+@import "components/typography";
+@import "components/input";
+@import "components/title";
+// ----------
+
+@import './colorMode/index';
+@import './global.scss';

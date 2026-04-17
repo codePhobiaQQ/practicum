@@ -1,0 +1,1419 @@
+# Translation of Plugins - Duplicate Post - Stable (latest release) in Russian
+# This file is distributed under the same license as the Plugins - Duplicate Post - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2026-02-06 17:26:58+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"X-Generator: GlotPress/4.0.3\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - Duplicate Post - Stable (latest release)\n"
+
+#. Author URI of the plugin
+#: copy-delete-posts.php
+msgid "https://inisev.com"
+msgstr "https://inisev.com"
+
+#. Author of the plugin
+#: copy-delete-posts.php
+msgid "Inisev"
+msgstr "Inisev"
+
+#: menu/configuration.php:624
+msgid "Enable \"Try it out\" buttons in add new plugin screen."
+msgstr "Включите кнопки \"Попробовать\" на экране добавления нового плагина."
+
+#: menu/configuration.php:616
+msgid "Clicking on it will spin up a new WordPress instance with the respective plugin installed. Powered by %s."
+msgstr "При нажатии на него будет создан новый экземпляр WordPress с установленным соответствующим плагином. Работает на %s."
+
+#: menu/configuration.php:614
+msgid "add new plugins"
+msgstr "добавлять новые плагины"
+
+#: menu/configuration.php:614
+msgid "If this feature is activated, you’ll see “Try it out”-buttons on the screen where you can"
+msgstr "Если эта функция активирована, вы увидите кнопки «Попробовать» на экране, где вы можете"
+
+#: menu/configuration.php:610
+msgid "Test new plugins before installing:"
+msgstr "Перед установкой тестируйте новые плагины:"
+
+#: menu/modal.php:226
+msgid "click here to select multiple sites"
+msgstr "нажмите здесь для выбора нескольких сайтов"
+
+#: menu/configuration.php:644
+msgid "Adjust URLs in post content for new subsite"
+msgstr "Настройте URL-адреса в содержимом записи для нового подсайта"
+
+#: menu/modal.php:56 menu/tooltips.php:118
+msgid "Select all"
+msgstr "Выбрать все"
+
+#: menu/configuration.php:349 menu/modal.php:196 menu/tooltips.php:257
+msgid "All post meta"
+msgstr "Все мета записи"
+
+#: menu/variables.php:115
+msgid "Ok, done!"
+msgstr "Хорошо, готово!"
+
+#: menu/variables.php:112
+msgid "No, I don't want to help you to improve the plugin."
+msgstr "Нет, я не хочу помогать вам улучшать плагин."
+
+#: menu/variables.php:106
+msgid "Trouble logging in there?"
+msgstr "Возникли трудности с входом на сайт?"
+
+#: menu/variables.php:101
+msgid "Go to forum"
+msgstr "Перейти на форум"
+
+#: menu/variables.php:90
+msgid "However, we noticed some optimization potential on your server."
+msgstr "Однако мы заметили некоторый потенциал оптимизации на вашем сервере."
+
+#: menu/variables.php:84
+msgid "Copy worked!"
+msgstr "Копия удалась!"
+
+#: menu/variables.php:44
+msgid "%b_start%Please%b_end% copy below logs %a_start%into the forum%a_end% so that we can make the plugin even better (for free)!"
+msgstr "%b_start%Пожалуйста%b_end% скопируйте приведенные ниже журналы %a_start%в форум%a_end%чтобы мы могли сделать плагин еще лучше (бесплатно)!"
+
+#: post/handler.php:707
+msgid "Invalid ID argument."
+msgstr "Недействительный аргумент ID."
+
+#: menu/variables.php:96
+msgid "Copy logs"
+msgstr "Копировать файлы журналов"
+
+#: copy-delete-posts.php:895
+msgid "Copy to clipboard failed, your browser does not support this function."
+msgstr "Невозможно осуществить копирование в буфер обмена, эта функция не поддерживается вашим браузером."
+
+#: copy-delete-posts.php:894
+msgid "Copy to clipboard was successfull."
+msgstr "Копирование в буфер обмена завершено успешно."
+
+#: post/handler.php:1605
+msgid "We couldn't catch current tasks, please try again later."
+msgstr "Мы не смогли отследить текущие задания, пожалуйста, повторите попытку позже."
+
+#: post/handler.php:1590
+msgid "We can't confirm that we killed this task now, please try again later or check if it't killed."
+msgstr "Сейчас мы не можем подтвердить, что эта задача завершена, пожалуйста, повторите попытку позже или проверьте, не была ли она завершена."
+
+#: post/handler.php:1567
+msgid "This task has already ended this work, please wait for list refresh and try again."
+msgstr "Это задание уже завершило эту работу, пожалуйста, дождитесь обновления списка и повторите попытку."
+
+#: post/handler.php:1551
+msgid "We can't hide this task now, – maybe it't already hidden. Please try again later."
+msgstr "Сейчас мы не можем скрыть это задание, - возможно, оно уже было скрыто. Пожалуйста, повторите попытку позже."
+
+#: post/handler.php:1476
+msgid "You can't clear messages when tasks are in progress, please firstly kill tasks or wait till the end."
+msgstr "Вы не можете очистить сообщения, когда задания находятся в процессе выполнения, пожалуйста, сначала завершите задания или дождитесь их окончания."
+
+#: post/handler.php:459
+msgid "Untitled Copy"
+msgstr "Копия без названия"
+
+#: menu/variables.php:146
+msgid "Average time is 8 copies per second."
+msgstr "Средняя производительность - 8 копий в секунду."
+
+#: menu/variables.php:143
+msgid ""
+"If you’re making a lot of copies it can take a while\n"
+"        <br>(up to 5 minutes if you’re on a slow server)."
+msgstr ""
+"Если вы делаете много копий, это может занять некоторое время\n"
+"        <br> (до 5 минут, если вы находитесь на медленном сервере)."
+
+#: menu/variables.php:141
+msgid "Please wait, copying in progress..."
+msgstr "Пожалуйста, подождите, идет копирование..."
+
+#: menu/variables.php:136
+msgid "Successfull copy image"
+msgstr "Копирование изображения прошло успешно"
+
+#: menu/tooltips.php:275
+msgid "to"
+msgstr "на"
+
+#: menu/tooltips.php:223
+msgid "Link cats"
+msgstr "Присоединить манипулятор"
+
+#: menu/tooltips.php:219
+msgid "Nav Menus"
+msgstr "Меню навигации"
+
+#: menu/tooltips.php:99
+msgid "define it for this case"
+msgstr "определить для данного конкретного случая"
+
+#: menu/tooltips.php:72
+msgid "Settings:"
+msgstr "Настройки:"
+
+#: menu/tooltips.php:46
+msgid "Copy now!"
+msgstr "Скопировать сейчас!"
+
+#: menu/notifications.php:95
+msgid "Clear notifiactions"
+msgstr "Очистить уведомления"
+
+#: menu/notifications.php:68
+msgid "Done:"
+msgstr "Готово:"
+
+#: menu/notifications.php:45
+msgid "In progress:"
+msgstr "В процессе:"
+
+#: menu/notifications.php:38
+msgid "Copy & Delete"
+msgstr "Копировать и удалить"
+
+#: menu/modal.php:245 menu/tooltips.php:296
+msgid "Copy and jump to editing"
+msgstr "Скопировать и перейти к редактированию"
+
+#: menu/modal.php:243 menu/tooltips.php:294
+msgid "Copy it!"
+msgstr "Скопировать!"
+
+#: menu/modal.php:239 menu/tooltips.php:103 menu/tooltips.php:290
+msgid "Making more than 50 copies will take some time. – depending on your server."
+msgstr "Создание более 50 копий займёт некоторое время. - это зависит от вашего сервера."
+
+#: menu/modal.php:218 menu/modal.php:230 menu/tooltips.php:63
+#: menu/tooltips.php:279
+msgid "this site"
+msgstr "этот сайт"
+
+#: menu/modal.php:212 menu/tooltips.php:57 menu/tooltips.php:273
+msgid "time(s)"
+msgstr "раз(а)"
+
+#: menu/modal.php:189 menu/tooltips.php:250
+msgid "USM Settings"
+msgstr "Настройки USM"
+
+#: menu/modal.php:181 menu/tooltips.php:242
+msgid "Yoast Settings"
+msgstr "Настройки Yoast"
+
+#: menu/modal.php:173 menu/tooltips.php:234
+msgid "Woo Settings"
+msgstr "Настройки Woo"
+
+#: menu/modal.php:167 menu/tooltips.php:228
+msgid "Plugin options:"
+msgstr "Настройки плагина:"
+
+#: menu/modal.php:104 menu/tooltips.php:165
+msgid "Feat. image"
+msgstr "Включая изображение"
+
+#: menu/modal.php:58 menu/tooltips.php:120
+msgid "–– Profiles ––"
+msgstr "---Профили---"
+
+#: menu/modal.php:57 menu/tooltips.php:119
+msgid "Clean slate"
+msgstr "Чистый лист"
+
+#: menu/modal.php:55 menu/tooltips.php:77 menu/tooltips.php:117
+msgid "–– Select ––"
+msgstr "---Выбрать---"
+
+#: menu/modal.php:52 menu/tooltips.php:115
+msgid "Use as basis settings"
+msgstr "Используйте в качестве базовых настроек"
+
+#: menu/modal.php:48 menu/tooltips.php:111
+msgid "Elements to copy:"
+msgstr "Элементы для копирования:"
+
+#: menu/configuration.php:1005 menu/variables.php:107
+msgid "Your account on Wordpress.org (where you open a new support thread) is different to the one you login to your WordPress dashboard (where you are now). If you don't have a WordPress.org account yet, please sign up at the top right on here. It only takes a minute :) Thank you!"
+msgstr "Ваша учетная запись на WordPress.org (от имени которой вы открываете новую тему поддержки) отличается от той, под которой вы вошли на персональную панель управления WordPress (где вы сейчас находитесь). Если у Вас ещё нет аккаунта на WordPress.org, пожалуйста, зарегистрируйтесь на этой странице в верхнем правом углу. Это займёт всего минуту :) Спасибо!"
+
+#: menu/configuration.php:1005
+msgid "<b>Questions?</b> We're happy to help in the <a href=\"https://wordpress.org/support/plugin/copy-delete-posts/#new-topic-0\" target=\"_blank\" style=\"text-decoration: none;\">Support Forum</a>."
+msgstr "<b>Вопросы? </b> Мы рады помочь вам на <a href=\"https://wordpress.org/support/plugin/copy-delete-posts/#new-topic-0\" target=\"_blank\" style=\"text-decoration: none;\">Форуме поддержки</a>."
+
+#: menu/configuration.php:984
+msgid "You will be notified when the deletion process ends via <span class=\"cdp-green\">Admin Bar Menu</span>."
+msgstr "Мы сообщим вам об окончании процесса удаления через <span class=\"cdp-green\">Панель администратора</span>."
+
+#: menu/configuration.php:981
+msgid "Delete selected pages/posts!"
+msgstr "Удалите выбранные страницы/посты!"
+
+#: menu/configuration.php:978
+msgid "I completed <u>all</u> steps, it’s ok!"
+msgstr "Я выполнил <u>всех</u> шагов, все в порядке!"
+
+#: menu/configuration.php:965
+msgid "Select this option to move deleted posts to trash (instead of deleting them permanently right away)."
+msgstr "Выберите эту опцию, чтобы переместить удаленные посты в корзину (вместо того, чтобы сразу навсегда их удалить)."
+
+#: menu/configuration.php:963
+msgid "Yes, keep deleted posts in trash!"
+msgstr "Да, хранить удалённые посты в корзине!"
+
+#: menu/configuration.php:959
+msgid "Move post(s) to trash?"
+msgstr "Переместить пост(ы) в корзину?"
+
+#: menu/configuration.php:953
+msgid "If it’s necessary the process will dynamically slow down - depending on your server’s resource consumption. For example, if you’re using another plugin which is running a background process and it takes a lot of resources (+50%), our plugin will wait/slow down until the other process is complete."
+msgstr "В случае необходимости процесс будет динамически замедлен - в зависимости от использования ресурсов на вашем сервере. Например, если вы используете другой плагин, который работает в фоновом режиме и потребляет слишком много ресурсов (+50%), наш плагин будет ждать/замедляться, пока другой процесс не завершится."
+
+#: menu/configuration.php:951
+msgid "Enable this if you want to have your posts/pages getting deleted in batches (instead of all at once).<br />This reduces the risk of timeouts if you have a lot to delete.<br />"
+msgstr "Включите эту опцию, если вы хотит удалять свои посты/страницы в пакетном режиме (а не все сразу).<br /> Таким образом вы сможете избежать возникновения задержек при удалении большого количества постов.<br />"
+
+#: menu/configuration.php:946
+msgid "per minute"
+msgstr "в минуту"
+
+#: menu/configuration.php:940
+msgid "Delete"
+msgstr "Удалить"
+
+#: menu/configuration.php:931
+msgid "Deletion throttling"
+msgstr "Замедление удаления"
+
+#: menu/configuration.php:927
+msgid "Enable this if you want to redirect the urls from your deleted posts/pages to the main one you decided to keep."
+msgstr "Включите эту опцию, если вы хотите переадресовать URL-адреса удаленных постов/страниц на основной адрес, который вы решили сохранить."
+
+#: menu/configuration.php:922 menu/configuration.php:936
+msgid "Enabled"
+msgstr "Включено"
+
+#: menu/configuration.php:921 menu/configuration.php:935
+msgid "Disabled"
+msgstr "Отключено"
+
+#: menu/configuration.php:916
+msgid "Automatic redirection"
+msgstr "Автоматическая переадресация"
+
+#: menu/configuration.php:909
+msgid "Check if you need these features (optional):"
+msgstr "Проверьте, нужны ли вам эти функции (опционально):"
+
+#: menu/configuration.php:905
+msgid "Select all the posts & pages which should be deleted (by ticking the checkboxes in the table above)."
+msgstr "Выберите все публикации и страницы, которые должны быть удалены ( установите флажки в соответствующих полях таблицы)."
+
+#: menu/configuration.php:901
+msgid "Make sure you created a backup with, e.g. with <a href=\"https://wordpress.org/plugins/backup-backup/\" target=\"_blank\">this plugin</a>."
+msgstr "Убедитесь, что вы создали резервную копию, используя, например, <a href=\"https://wordpress.org/plugins/backup-backup/\" target=\"_blank\">этот плагин</a>."
+
+#: menu/configuration.php:895
+msgid "Steps to deletion:"
+msgstr "Этапы удаления:"
+
+#: menu/configuration.php:890
+msgid "You selected <b class=\"cdp-t-d-ct cdp-f-w-light\">0</b> pages/posts to be deleted"
+msgstr "Вы выбрали для удаления <b class=\"cdp-t-d-ct cdp-f-w-light\">0</b> страниц/публикаций"
+
+#: menu/configuration.php:882
+msgid "<u class=\"cdp-d-select-all cdp-f-w-light\">Select all</u> (also from other pages)"
+msgstr "<u class=\"cdp-d-select-all cdp-f-w-light\">Выбрать все</u> (также и с других страниц)"
+
+#: menu/configuration.php:865
+msgid "# of words"
+msgstr "# (количество) слов"
+
+#: menu/configuration.php:864
+msgid "Date created"
+msgstr "Дата создания"
+
+#: menu/configuration.php:863
+msgid "Type"
+msgstr "Тип"
+
+#: menu/configuration.php:862
+msgid "Slug/URL"
+msgstr "Идентификатор/URL-адрес"
+
+#: menu/configuration.php:849
+msgid "per page"
+msgstr "на страницу"
+
+#: menu/configuration.php:836
+msgid "Show"
+msgstr "Показать"
+
+#: menu/configuration.php:828
+msgid "Scan has found [<span id=\"cdp-d-table-pagi-ilosc-wynikow\" class=\"cdp-f-w-bold\"></span>] duplicates"
+msgstr "В результате сканирования обнаружено [<span id=\"cdp-d-table-pagi-ilosc-wynikow\" class=\"cdp-f-w-bold\"></span>] дубликатов"
+
+#: menu/configuration.php:821
+msgid "Scan for duplicates now!<br /><small class=\"cdp-sm-d cdp-f-s-17 cdp-f-w-medium\">(at this point nothing gets deleted)</small>"
+msgstr "Начать сканирование для поиска дубликатов!<br /><small class=\"cdp-sm-d cdp-f-s-17 cdp-f-w-medium\">(до этого момента ничего не было удалено)</small>"
+
+#: menu/configuration.php:815
+msgid "<b>Filter results (optional)</b>: Only list them, if they<span id=\"cdpp-switch-mf\"> […]</span>"
+msgstr "<b>Результаты поиска по фильтру (опционально)</b>: Включать в список только, если они <span id=\"cdpp-switch-mf\"> […]</span>"
+
+#: menu/configuration.php:809
+msgid "Delete ALL duplicates, don’t keep any (Be careful!)"
+msgstr "Удалить ВСЕ дубликаты, не оставлять ни одного (Будьте осторожны!)"
+
+#: menu/configuration.php:808
+msgid "Keep the newest duplicate (typically the last copy you made)"
+msgstr "Сохранить самый свежий дубликат (обычно это последняя копия, которую вы сделали)"
+
+#: menu/configuration.php:807
+msgid "Keep the oldest duplicate (typically the original)"
+msgstr "Сохранить самый старый дубликат (как правило, оригинал)"
+
+#: menu/configuration.php:803
+msgid "Which version do you want to keep?"
+msgstr "Какую версию вы хотите сохранить?"
+
+#: menu/configuration.php:795
+msgid "Huh?"
+msgstr "Что?"
+
+#: menu/configuration.php:791
+msgid "Also count pages/posts of different types as duplicates"
+msgstr "Также учитывать страницы/записи разных типов как дубликаты"
+
+#: menu/configuration.php:790
+msgid "Only count pages/posts of the same type as duplicates"
+msgstr "Считать дубликатами только страницы/посты одного типа"
+
+#: menu/configuration.php:783
+msgid "...need others? <a href=\"mailto:hi@copy-delete-posts.com\" target=\"_blank\">Suggest them!</a>"
+msgstr "...нужны другие? <a href=\"mailto:hi@copy-delete-posts.com\" target=\"_blank\">Предлагайте!</a>"
+
+#: menu/configuration.php:781
+msgid "Word count"
+msgstr "Количество слов"
+
+#: menu/configuration.php:779
+msgid "Excerpt (<span class=\"cdp-no-empty-text\"><b>including</b> empty</span>)"
+msgstr "Фрагмент (<span class=\"cdp-no-empty-text\"><b>including</b> empty</span>)"
+
+#: menu/configuration.php:772
+msgid "When does “yes” make sense here?"
+msgstr "Когда в данном случае \"да\" будет иметь смысл?"
+
+#: menu/configuration.php:772
+msgid "The copies you created may have been given different titles automatically (according to the rules in <a href=\"#\" class=\"cdp-go-to-names-chapter\">this section</a>) and therefore would not count as duplicates as they have different titles.<br /><br />To remedy this, you can select “Yes” here so that those posts/pages also get considered as duplicates."
+msgstr "Возможно, созданные вами копии автоматически получили разные названия (в соответствии с правилами, изложенными в <a href=\"#\" class=\"cdp-go-to-names-chapter\">этом разделе</a>) и поэтому не будут считаться дубликатами, поскольку имеют разные названия.<br /><br />Чтобы это исправить, вы можете выбрать \"Да\" здесь, чтобы эти посты/страницы также считались дубликатами."
+
+#: menu/configuration.php:771
+msgid "Yes"
+msgstr "Да"
+
+#: menu/configuration.php:770
+msgid "No"
+msgstr "Нет"
+
+#: menu/configuration.php:767
+msgid "Do you want to consider different titles still to be identical if a) the copied posts/pages<br />were created by this plugin and b) they were not modified thereafter?"
+msgstr "Вы по-прежнему хотите учитывать разные заголовки как идентичные, если a) скопированные посты/страницы<br />были созданы этим плагином и b) они не были изменены после этого?"
+
+#: menu/configuration.php:762
+msgid "Slugs are never 100% identical (i.e. Wordpress adds a counter automatically to ensure they are unique). The rule to only have them at least 85% identical does the job fine (you can see after the scan which posts are considered identical)."
+msgstr "Динамические идентификаторы никогда не бывают на 100% идентичными (т.е. WordPress автоматически добавляет счетчик, чтобы убедиться в их уникальности). С этой задачей прекрасно справляется правило, согласно которому они должны быть идентичны хотя бы на 85% (после сканирования можно увидеть, какие посты рассматриваются как идентичные)."
+
+#: menu/configuration.php:762
+msgid "Similar slug"
+msgstr "Похожая идентификатор"
+
+#: menu/configuration.php:759
+msgid "(show more options)"
+msgstr "(показать дополнительные опции)"
+
+#: menu/configuration.php:751
+msgid "Count them as duplicates if they are identical with respect to <u class=\"cdp-f-w-bold\">all</u> of the below..."
+msgstr "Учитывать их как дубликаты, если они идентичны в отношении <u class=\"cdp-f-w-bold\">все</u> перечисленных ниже..."
+
+#: menu/configuration.php:746
+msgid "Custom posts"
+msgstr "Пользовательские публикации"
+
+#: menu/configuration.php:741
+msgid "Scan for duplicates in..."
+msgstr "Сканировать для поиска дубликатов в..."
+
+#: menu/configuration.php:724
+msgid "Go premium now"
+msgstr "Подключить Премиум сейчас"
+
+#: menu/configuration.php:717
+msgid ""
+"And: you can also use this feature for any other redirections you may need\n"
+"                      (not only redirects from deleted posts/pages)!"
+msgstr ""
+"И: вы также можете использовать эту функцию для любых других перенаправлений, которые могут вам понадобиться\n"
+"                     (не только для перенаправления с удаленных публикаций/страниц)!"
+
+#: menu/configuration.php:714
+msgid "This isn’t just good for your visitors, but also for SEO: the “link juice” from your old (deleted) articles will be forwarded to the versions you keep, helping you to rank higher in search engines."
+msgstr "Это полезно не только для ваших посетителей, но и для SEO: \"пюре из ссылок\" с ваших старых (удаленных) статей будет перенаправлено на сохранённые версии, что поможет вам занять более высокую позицию в поисковых системах."
+
+#: menu/configuration.php:711
+msgid "As part of the <span class=\"cdp-green\">premium plugin</span> you can enable redirects, so that the URLs of your deleted posts/pages automatically take visitors to the version which you decided to keep."
+msgstr "В рамках <span class=\"cdp-green\">Премиум плагин</span> вы можете активировать переадресацию таким образом, чтобы URL-адреса ваших удаленных постов/страниц автоматически перенаправляли посетителей на версию, которую вы решили сохранить."
+
+#: menu/configuration.php:698
+msgid "Redirection"
+msgstr "Переадресация"
+
+#: menu/configuration.php:695
+msgid "Automatic Cleanup"
+msgstr "Автоматическая очистка"
+
+#: menu/configuration.php:692
+msgid "Manual Cleanup"
+msgstr "Ручная очистка"
+
+#: menu/configuration.php:687
+msgid ""
+"Before you delete anything here (which cannot be undone!) we <b class=\"cdp-f-w-bold\">strongly suggest</b><br />\n"
+"                that you create a backup, for example with <a href=\"https://wordpress.org/plugins/backup-backup/\" target=\"_blank\">this plugin</a>"
+msgstr ""
+"Прежде чем вы удалите что-либо здесь (что нельзя отменить!), мы <b class=\"cdp-f-w-bold\">настоятельно рекомендуем</b><br />\n"
+"                 что вы создаете резервную копию, например, с помощью <a href=\"https://wordpress.org/plugins/backup-backup/\" target=\"_blank\">этого плагина</a>"
+
+#: menu/configuration.php:679
+msgid "Delete duplicate posts/pages"
+msgstr "Удалить дубликаты публикаций/страниц"
+
+#: menu/configuration.php:672
+msgid "...and after your copy frenzy, you may need to…"
+msgstr "...и после того, как копирование приведет вас в бешенство, вам может понадобиться..."
+
+#: menu/configuration.php:629
+msgid "Additional features"
+msgstr "Дополнительные возможности"
+
+#: menu/configuration.php:590
+msgid "If checked, you will see a reference to the original post/page (on the copied version)."
+msgstr "Если флажок установлен, вы увидите ссылку на исходный пост/страницу (на скопированной версии)."
+
+#: menu/configuration.php:589
+msgid "Show reference to original item?"
+msgstr "Отображать ссылку на исходный элемент?"
+
+#: menu/configuration.php:587
+msgid "Gutenberg editor"
+msgstr "Редактор Gutenberg"
+
+#: menu/configuration.php:586
+msgid "Bulk actions menu"
+msgstr "Меню массовых операций"
+
+#: menu/configuration.php:584 menu/configuration.php:593
+msgid "Edit screens"
+msgstr "Экраны редактирования"
+
+#: menu/configuration.php:583 menu/configuration.php:592
+msgid "Posts/pages lists"
+msgstr "Списки постов/страниц"
+
+#: menu/configuration.php:581
+msgid "Display copy option on..."
+msgstr "Отобразить опцию копирования в..."
+
+#: menu/configuration.php:579
+msgid "Custom posts types"
+msgstr "Произвольные типы публикаций"
+
+#: menu/configuration.php:578 menu/configuration.php:744
+msgid "Posts"
+msgstr "Посты"
+
+#: menu/configuration.php:577 menu/configuration.php:745
+msgid "Pages"
+msgstr "Страницы"
+
+#: menu/configuration.php:575
+msgid "Content types which can be copied"
+msgstr "Типы содержания, которые могут быть скопированы"
+
+#: menu/configuration.php:555
+msgid "Which user role(s) should be able to copy & delete? <i style=\"color: gray\">– The role also must have access to the dashboard.</i>"
+msgstr "Какая роль(и) пользователя будет иметь возможность копировать и удалять? <i style=\"color: gray\">- Эта роль также должна предусматривать доступ к панели управления. </i>"
+
+#: menu/configuration.php:554
+msgid "User level permissions"
+msgstr "Разрешения уровня пользователя"
+
+#: menu/configuration.php:550
+msgid "ALWAYS change the type when copied (posts will become pages, pages will become posts)"
+msgstr "ВСЕГДА меняйте тип при копировании (записи станут страницами, страницы - записями)"
+
+#: menu/configuration.php:549
+msgid "Copies will be the same type as the original"
+msgstr "Копии будут того же типа, что и оригиналы"
+
+#: menu/configuration.php:544
+msgid "However, if you want it as a <b class=\"cdp-f-w-bold\">default setting option</b>, then please select it below: "
+msgstr "Однако если вы хотите использовать его в качестве <b class=\"cdp-f-w-bold\">настройки по умолчанию</b>, то пожалуйста, отметьте это ниже: "
+
+#: menu/configuration.php:543
+msgid "If you want to make a page out of a post, or vice versa, then you can do this on a <b class=\"cdp-f-w-bold\">case by case basis</b> if you select the option “Define it specifically for this case” in the copy-tooltip, and then select this option on the following screen in the tooltip."
+msgstr "Если вы хотите из публикации сделать страницу или наоборот, то это можно осуществить <b class=\"cdp-f-w-bold\">в каждом случае индивидуально</b>, если выбрать опцию \"Определить для этого конкретного случая\" на всплывающей подсказке при копировании, а затем выбрав эту опцию на следующем экране всплывающей подсказки."
+
+#: menu/configuration.php:542
+msgid "By default, the type of what you copy does not change, i.e. if you copy a post the new version will also be a post, and the same for pages."
+msgstr "По умолчанию тип того, что вы копируете, не меняется, т.е. если вы копируете публикацию, то новая версия также будет публикацией, то же самое касается страниц."
+
+#: menu/configuration.php:538
+msgid "Pages vs. Posts converter"
+msgstr "Конвертер страниц и публикаций"
+
+#: menu/configuration.php:534
+msgid "If you created multiple copies in one go, you’ll be taken to the first copy."
+msgstr "Если вы создали несколько копий за одну операцию, вы будете перенаправлены к первой копии."
+
+#: menu/configuration.php:531
+msgid "Decide on a case-by-case basis (adds new button on copy screen)"
+msgstr "В каждом конкретном случае определять индивидуально (добавляет новую кнопку на экране копирования)"
+
+#: menu/configuration.php:530
+msgid "Take me to the edit-page of the created copy"
+msgstr "Перейти на страницу редактирования созданной копии"
+
+#: menu/configuration.php:529
+msgid "Leave me where I was"
+msgstr "Остаться там, где я был"
+
+#: menu/configuration.php:525
+msgid "Navigation after copying"
+msgstr "Навигация после копирования"
+
+#: menu/configuration.php:519
+msgid "<b class=\"cdp-ff-b4\">Other</b> options"
+msgstr "<b class=\"cdp-ff-b4\">Другие</b> возможности"
+
+#: menu/configuration.php:503
+msgid "If you make multiple copies in one go, use the Counter-option as otherwise some copies will have the same name."
+msgstr "Если вы создаете несколько копий за одну операцию, используйте опцию Счетчик, поскольку в противном случае у некоторых копий могут быть одинаковые имена."
+
+#: menu/configuration.php:502
+msgid "If you’re not of the drag & droppy-type, you can also enter shortcodes [Counter], [CurrentDate] and [CurrentTime]."
+msgstr "Если вы не любитель использовать перетаскивание (drag & drop), вы также можете ввести шорткоды [Counter], [CurrentDate] и [CurrentTime]."
+
+#: menu/configuration.php:501
+msgid "You can also type tailored text into the fields above."
+msgstr "Вы также можете ввести индивидуальный текст в поля выше."
+
+#: menu/configuration.php:497
+msgid "Adds the <b class=\"cdp-f-w-semi-bold\">current time</b> in hh:mm:ss format"
+msgstr "Добавляет <b class=\"cdp-f-w-semi-bold\">текущее время</b> в формате чч:мм:сс"
+
+#: menu/configuration.php:495
+msgid "CurrentTime"
+msgstr "Текущее время"
+
+#: menu/configuration.php:488
+msgid "format."
+msgstr "формат."
+
+#: menu/configuration.php:485 menu/modal.php:59 menu/tooltips.php:121
+msgid "Custom"
+msgstr "Пользовательский"
+
+#: menu/configuration.php:484
+msgid "dd/mm/yyyy"
+msgstr "дд/мм/гггг"
+
+#: menu/configuration.php:483
+msgid "mm/dd/yyyy"
+msgstr "мм/дд/гггг"
+
+#: menu/configuration.php:480
+msgid "Adds the <b class=\"cdp-f-w-semi-bold\">current date</b> in"
+msgstr "Добавляет <b class=\"cdp-f-w-semi-bold\">текущая дата</b> в"
+
+#: menu/configuration.php:475
+msgid "CurrentDate"
+msgstr "Текущая дата"
+
+#: menu/configuration.php:471
+msgid "Adds an <b class=\"cdp-f-w-semi-bold\">incremental counter</b> (starting with “2”)"
+msgstr "Добавляет <b class=\"cdp-f-w-semi-bold\">суммирующий счётчик</b> (начиная с \"2\")."
+
+#: menu/configuration.php:469
+msgid "Counter"
+msgstr "Счётчик"
+
+#: menu/configuration.php:465
+msgid "Drag & drop the automatic elements into the Prefix/Suffix fields to add them."
+msgstr "Для добавления автоматических элементов перетащите их в поля префикса/суффикса."
+
+#: menu/configuration.php:458
+msgid "Example based on current selections:"
+msgstr "Пример, основывающийся на текущем выборе:"
+
+#: menu/configuration.php:449
+msgid "Change to blank"
+msgstr "Изменить на незаполненный"
+
+#: menu/configuration.php:440
+msgid "Suffix"
+msgstr "Суффикс"
+
+#: menu/configuration.php:438
+msgid "Prefix"
+msgstr "Префикс"
+
+#: menu/configuration.php:434
+msgid "Build your preferred naming logic for the copies:"
+msgstr "Создайте логику присвоения имен копиям по своему предпочтению:"
+
+#: menu/configuration.php:428
+msgid "What <b class=\"cdp-ff-b4\">name(s)</b> should the copies have?"
+msgstr "Какое <b class=\"cdp-ff-b4\">имя (имена)</b> должно быть присвоено копиям?"
+
+#: menu/configuration.php:417 menu/configuration.php:508
+#: menu/configuration.php:665 menu/configuration.php:988
+msgid "Close section"
+msgstr "Закрыть раздел"
+
+#: menu/configuration.php:415 menu/configuration.php:506
+#: menu/configuration.php:663
+msgid "Save"
+msgstr "Сохранить"
+
+#: menu/configuration.php:411
+msgid ""
+"Do you know anything else you want to have copied (e.g. data added by a different plugin)? <br />\n"
+"                Please <a href=\"mailto:hi@copy-delete-posts.com\" target=\"_blank\"><span class=\"cdp-green\">tell us about it</span></a>, we always want to further improve this plugin! :) "
+msgstr ""
+"Известно ли вам что-нибудь еще, что вы хотите скопировать (например, данные, добавленные другим плагином)? <br />\n"
+"                Пожалуйста, <a href=\"mailto:hi@copy-delete-posts.com\" target=\"_blank\"><span class=\"cdp-green\">расскажите нам об этом</span></a>, мы всегда стремимся к дальнейшему улучшению этого плагина! :) "
+
+#: menu/configuration.php:404
+msgid "…the same settings from the <a href=\"https://wordpress.org/plugins/wordpress-seo/\" target=\"_blank\"><span class=\"cdp-green\">Yoast SEO plugin</span></a> as the original."
+msgstr "...те же настройки из <a href=\"https://wordpress.org/plugins/wordpress-seo/\" target=\"_blank\"><span class=\"cdp-green\">Yoast SEO plugin</span></a>, как и в оригинале."
+
+#: menu/configuration.php:399
+msgid "Yoast SEO Settings"
+msgstr "Настройки Yoast SEO"
+
+#: menu/configuration.php:387
+msgid "…the same settings from the <a href=\"https://www.ultimatelysocial.com/usm-premium/\" target=\"_blank\"><span class=\"cdp-green\">Ultimate Social Media plugin</span></a> as the original."
+msgstr "...те же настройки из <a href=\"https://www.ultimatelysocial.com/usm-premium/\" target=\"_blank\"><span class=\"cdp-green\">плагина Ultimate Social Media</span></a>, как и в оригинале."
+
+#: menu/configuration.php:382
+msgid "Ultimate Social Media Settings"
+msgstr "Нстройки Ultimate Social Media"
+
+#: menu/configuration.php:371 menu/configuration.php:388
+#: menu/configuration.php:405
+msgid "…get empty settings."
+msgstr "…оставьте настройки пустыми."
+
+#: menu/configuration.php:370
+msgid "…the same settings from the <a href=\"https://wordpress.org/plugins/woocommerce/\" target=\"_blank\"><span class=\"cdp-green\">WooCommerce plugin</span></a> as the original."
+msgstr "...те же настройки из <a href=\"https://wordpress.org/plugins/woocommerce/\" target=\"_blank\"><span class=\"cdp-green\">плагина WooCommerce</span></a>, как и в оригинале."
+
+#: menu/configuration.php:365
+msgid "WooCommerce Settings"
+msgstr "Настройки WooСommerce"
+
+#: menu/configuration.php:355
+msgid "…copy only required post/page metadata."
+msgstr "...копировать только необходимые метаданные записи/страницы."
+
+#: menu/configuration.php:354
+msgid "…clone all metadata tags assigned to post/page."
+msgstr "...клонировать все метки метаданных, назначенные записи/странице."
+
+#: menu/configuration.php:336 menu/modal.php:162
+msgid "Link categories"
+msgstr "Рубрики ссылок"
+
+#: menu/configuration.php:333 menu/configuration.php:338
+msgid "…be without private taxonomy."
+msgstr "...быть без личной таксономии."
+
+#: menu/configuration.php:332 menu/configuration.php:337
+msgid "…get this private taxonomy from the original."
+msgstr "...получить эту личную таксономию из оригинала."
+
+#: menu/configuration.php:327 menu/modal.php:158
+msgid "Navigation Menus"
+msgstr "Меню навигации"
+
+#: menu/configuration.php:317
+msgid "…be without custom taxonomy."
+msgstr "...быть без пользовательской таксономии."
+
+#: menu/configuration.php:316
+msgid "…get all custom taxonomy from the original."
+msgstr "...получить всю пользовательскую таксономию из оригинала."
+
+#: menu/configuration.php:315 menu/modal.php:154 menu/tooltips.php:215
+msgid "Taxonomies"
+msgstr "Таксономии"
+
+#: menu/configuration.php:312
+msgid "…be without any tags."
+msgstr "...быть без каких-либо меток."
+
+#: menu/configuration.php:311
+msgid "…get all tags of the original post."
+msgstr "...получить все метки исходной записи."
+
+#: menu/configuration.php:310 menu/modal.php:150 menu/tooltips.php:211
+msgid "Tags"
+msgstr "Метки"
+
+#: menu/configuration.php:307
+msgid "…be Uncategorized, no categories will be copied."
+msgstr "...быть без разделения на категории, ни одна категория не будет скопирована."
+
+#: menu/configuration.php:306
+msgid "…get all categories from the original post."
+msgstr "...получить все категории исходной публикации."
+
+#: menu/configuration.php:305 menu/modal.php:144 menu/tooltips.php:205
+msgid "Categories"
+msgstr "Категории"
+
+#: menu/configuration.php:302
+msgid "…get the menu order set to default (0)."
+msgstr "... получить порядок меню, установленный по умолчанию (0)."
+
+#: menu/configuration.php:301
+msgid "…get the <a href=\"https://wordpress.stackexchange.com/questions/25202/how-to-change-order-of-menu-items\" target=\"_blank\"><span class=\"cdp-green\">menu order</span></a> from the original."
+msgstr "…получить <a href=\"https://wordpress.stackexchange.com/questions/25202/how-to-change-order-of-menu-items\" target=\"_blank\"><span class=\"cdp-green\">порядок меню</span></a> из оригинала."
+
+#: menu/configuration.php:300 menu/modal.php:136 menu/tooltips.php:197
+msgid "Menu order"
+msgstr "Порядок меню"
+
+#: menu/configuration.php:297
+msgid "…get no comments from the original."
+msgstr "...не получать никаких комментариев из оригинала."
+
+#: menu/configuration.php:296
+msgid "…get all comments from the original."
+msgstr "...получить все комментарии из оригинала."
+
+#: menu/configuration.php:295 menu/modal.php:132 menu/tooltips.php:193
+msgid "Comments"
+msgstr "Комментарии"
+
+#: menu/configuration.php:292
+msgid "…not get their child pages copied along (if the page is a parent)."
+msgstr "...и не копировать их дочерние страницы (если страница является исходной)."
+
+#: menu/configuration.php:291
+msgid "…get their <a href=\"https://phppot.com/wordpress/how-to-create-a-child-page-in-wordpress/\" target=\"_blank\"><span class=\"cdp-green\">child pages</span></a> copied as well, with all current settings applied to child-duplicates (if the page is a parent)."
+msgstr "…скопировать <a href=\"https://phppot.com/wordpress/how-to-create-a-child-page-in-wordpress/\" target=\"_blank\"><span class=\"cdp-green\">дочерняя страница</span></a> также, при этом применить к дочерним дубликатам все текущие настройки (если страница является исходной)."
+
+#: menu/configuration.php:290 menu/modal.php:126 menu/tooltips.php:187
+msgid "Children"
+msgstr "Дочерние"
+
+#: menu/configuration.php:287
+msgid "…get existing attachments from the original."
+msgstr "...получить из оригинала имеющиеся вложения."
+
+#: menu/configuration.php:286
+msgid "…create new <a href=\"https://wordpress.org/support/article/using-image-and-file-attachments/#attachment-to-a-post\" target=\"_blank\"><span class=\"cdp-green\">attachments</span></a> (duplicates in Media Library) as well. <i>Recommended only for Multisites.</i>"
+msgstr "...создать новые <a href=\"https://wordpress.org/support/article/using-image-and-file-attachments/#attachment-to-a-post\" target=\"_blank\"><span class=\"cdp-green\">вложения</span></a> (дубликаты в медиабиблиотеке). <i>Рекомендуется только для мультисайтов.</i>"
+
+#: menu/configuration.php:285 menu/modal.php:140 menu/tooltips.php:201
+msgid "Attachments"
+msgstr "Вложения"
+
+#: menu/configuration.php:282
+msgid "…get no password."
+msgstr "...не получать пароль."
+
+#: menu/configuration.php:281
+msgid "…get the same <a href=\"https://wordpress.org/support/article/using-password-protection/\" target=\"_blank\"><span class=\"cdp-green\">password</span></a> as original."
+msgstr "…получить тот же <a href=\"https://wordpress.org/support/article/using-password-protection/\" target=\"_blank\"><span class=\"cdp-green\">пароль</span></a>, что и в оригинале."
+
+#: menu/configuration.php:280 menu/modal.php:122 menu/tooltips.php:183
+msgid "Password"
+msgstr "Пароль"
+
+#: menu/configuration.php:277
+msgid "…get the user that is duplicating as an author."
+msgstr "...получить пользователя, который создаёт дубликат, в качестве автора."
+
+#: menu/configuration.php:276
+msgid "…get the same author as original."
+msgstr "...получить того же автора, что и оригинал."
+
+#: menu/configuration.php:275 menu/modal.php:118 menu/tooltips.php:179
+msgid "Author"
+msgstr "Автор"
+
+#: menu/configuration.php:272
+msgid "…get the standard post format."
+msgstr "...получить стандартный формат публикации."
+
+#: menu/configuration.php:271
+msgid "…get the same <a href=\"https://wordpress.org/support/article/post-formats/\" target=\"_blank\"><span class=\"cdp-green\">post format</span></a> as original."
+msgstr "...получить тот же <a href=\"https://wordpress.org/support/article/post-formats/\" target=\"_blank\"><span class=\"cdp-green\">формат публикации</span></a>, что и в оригинале."
+
+#: menu/configuration.php:270 menu/modal.php:114 menu/tooltips.php:175
+msgid "Format"
+msgstr "Формат"
+
+#: menu/configuration.php:267
+msgid "…get the default page template."
+msgstr "...получить шаблон страницы по умолчанию."
+
+#: menu/configuration.php:266
+msgid "…get the same page <a href=\"https://wordpress.com/support/templates/\" target=\"_blank\"><span class=\"cdp-green\">template</span></a> as original."
+msgstr "…получите ту же страницу, что и в оригинале, <a href=\"https://wordpress.com/support/templates/\" target=\"_blank\"><span class=\"cdp-green\">шаблон</span></a>."
+
+#: menu/configuration.php:265 menu/modal.php:108 menu/tooltips.php:169
+msgid "Template"
+msgstr "Шаблон"
+
+#: menu/configuration.php:262
+msgid "…get no featured image."
+msgstr "...не получать никаких изображений."
+
+#: menu/configuration.php:261
+msgid "…it will set the same <a href=\"https://firstsiteguide.com/wordpress-featured-image/\" target=\"_blank\"><span class=\"cdp-green\">featured image</span></a> as the original."
+msgstr "... будет установлено то же <a href=\"https://firstsiteguide.com/wordpress-featured-image/\" target=\"_blank\"><span class=\"cdp-green\">избранное изображение</span></a>, что и в оригинале."
+
+#: menu/configuration.php:260
+msgid "Featured image"
+msgstr "Избранное изображение"
+
+#: menu/configuration.php:257
+msgid "…get no content (be completely blank)."
+msgstr "...не получать никакого содержимого ( оставаться совершенно пустым)."
+
+#: menu/configuration.php:256
+msgid "…get all the content (text, images, videos and other elements/blocks) from the original."
+msgstr "...получить все содержимое (текст, изображения, видео и другие элементы/блоки) из оригинала."
+
+#: menu/configuration.php:255 menu/modal.php:100 menu/tooltips.php:161
+msgid "Content"
+msgstr "Содержание"
+
+#: menu/configuration.php:252
+msgid "…get an empty <i>custom</i> excerpt (and default to taking the first 55 words of the post)."
+msgstr "...получить пустой <i>custom</i> фрагмент (и по умолчанию взять из записи первые 55 слов)."
+
+#: menu/configuration.php:251
+msgid "…get the custom <a href=\"https://wordpress.org/support/article/excerpt/\" target=\"_blank\"><span class=\"cdp-green\">excerpt</span></a> (post/page summary) of the original (if the original had any)."
+msgstr "...получить пользовательский <a href=\"https://wordpress.org/support/article/excerpt/\" target=\"_blank\"><span class=\"cdp-green\">фрагмент</span></a> ( краткое содержание поста/страницы) оригинала (если таковое имеется)."
+
+#: menu/configuration.php:250 menu/modal.php:96 menu/tooltips.php:157
+msgid "Excerpt"
+msgstr "Фрагмент"
+
+#: menu/configuration.php:247
+msgid "…get a blank slug, unless the page is published, then it will generate it automatically."
+msgstr "... получить пустой идентификатор, за исключением случаев, когда страница опубликована, тогда он будет сгенерирован автоматически."
+
+#: menu/configuration.php:239 menu/modal.php:90 menu/tooltips.php:151
+msgid "Slug"
+msgstr "Идентификатор"
+
+#: menu/configuration.php:236
+msgid "…get the status “Draft”."
+msgstr "...получить статус \"Черновик\"."
+
+#: menu/configuration.php:235
+msgid "…get status of original article (which can be “published” or “deleted” etc.)"
+msgstr "...получить статус исходной статьи ( это может быть \"опубликовано\" или \"удалено\" и т.д.)"
+
+#: menu/configuration.php:234 menu/modal.php:86 menu/tooltips.php:147
+msgid "Status"
+msgstr "Статус"
+
+#: menu/configuration.php:231
+msgid "…get the date & time at time of copying. "
+msgstr "...получить дату и время во время копирования. "
+
+#: menu/configuration.php:230
+msgid "…get the same creation date & time as the original."
+msgstr "...получить ту же дату и время создания, что и оригинал."
+
+#: menu/configuration.php:229 menu/modal.php:82 menu/tooltips.php:143
+msgid "Date"
+msgstr "Дата"
+
+#: menu/configuration.php:226
+msgid "…be titled “Untitled”."
+msgstr "...под названием \" Безымянный\"."
+
+#: menu/configuration.php:225
+msgid "…get the title as defined in the <a href=\"#\" class=\"cdp-go-to-names-chapter\"><span class=\"cdp-green\">next section</span></a>."
+msgstr "…получить название согласно определений в <a href=\"#\" class=\"cdp-go-to-names-chapter\"><span class=\"cdp-green\">следующем разделе</span></a>."
+
+#: menu/configuration.php:224 menu/configuration.php:756
+#: menu/configuration.php:861 menu/modal.php:78 menu/tooltips.php:139
+msgid "Title"
+msgstr "Название"
+
+#: menu/configuration.php:219
+msgid "<b>If <u class=\"cdp-f-w-bold\">un</u>checked</b> copies will..."
+msgstr "<b>Если <u class=\"cdp-f-w-bold\">un</u>checked</b> копии будут ..."
+
+#: menu/configuration.php:218
+msgid "<b>If checked</b> copies will..."
+msgstr "<b>Если отмечено</b> копии будут..."
+
+#: menu/configuration.php:208
+msgid "Which <b class=\"cdp-ff-b4\">elements</b> shall be copied?"
+msgstr "Какие <b class=\"cdp-ff-b4\">элементы</b> должны быть скопированы?"
+
+#: menu/configuration.php:196
+msgid "+ Add / manage / import / export settings"
+msgstr "+ Добавление / управление / импорт / экспорт настроек"
+
+#: menu/configuration.php:189
+msgid "settings"
+msgstr "настройки"
+
+#: menu/configuration.php:185
+msgid "Add new"
+msgstr "Добавить новую"
+
+#: menu/configuration.php:184 menu/modal.php:67 menu/tooltips.php:85
+#: menu/tooltips.php:129
+msgid "Default"
+msgstr "По умолчанию"
+
+#: menu/configuration.php:166
+msgid "Below are your"
+msgstr "Ниже ваши"
+
+#: menu/configuration.php:155
+msgid "Don't show this intro – never again!"
+msgstr "Больше никогда не показывать эту заставку!"
+
+#: menu/configuration.php:151
+msgid "Got it, close intro!"
+msgstr "Понятно. Закрыть заставку!"
+
+#: menu/configuration.php:149
+msgid "…and you can also <b>delete duplicate</b> posts easily, see below :)"
+msgstr "...и вы также можете с легкостью <b>удалить дубликаты</b> публикаций, см. ниже :)"
+
+#: menu/configuration.php:143 menu/configuration.php:585
+msgid "Admin bar"
+msgstr "Панель администратора"
+
+#: menu/configuration.php:137
+msgid "Edit screen"
+msgstr "Экран редактирования"
+
+#: menu/configuration.php:131
+msgid "List of posts/pages"
+msgstr "Список публикаций/страниц"
+
+#: menu/configuration.php:128
+msgid "You can now easily copy posts & pages in various areas:"
+msgstr "Теперь вы можете легко копировать публикации и страницы в различных областях:"
+
+#: menu/configuration.php:122
+msgid "Show intro"
+msgstr "Показать заставку"
+
+#: menu/configuration.php:119
+msgid "Welcome to Copy & Delete Posts!"
+msgstr "Добро пожаловать на Copy & Delete Posts!"
+
+#: menu/configuration.php:111
+msgid "Loading..."
+msgstr "Загрузка…"
+
+#: copy-delete-posts.php:1057
+msgid "Settings"
+msgstr "Настройки"
+
+#: copy-delete-posts.php:997
+msgid "post"
+msgstr "запись"
+
+#: copy-delete-posts.php:997
+msgid "this"
+msgstr "этот"
+
+#: copy-delete-posts.php:997
+msgid "Copy of"
+msgstr "Копия из"
+
+#: copy-delete-posts.php:825
+msgid "There was an error with this notification."
+msgstr "При отправке этого уведомления произошла ошибка."
+
+#: copy-delete-posts.php:824
+msgid "It will hide this banner just for now."
+msgstr "Это позволит скрыть на время этот баннер."
+
+#: copy-delete-posts.php:823
+msgid "Premium"
+msgstr "Премиум"
+
+#: copy-delete-posts.php:821
+msgid "Plugin has been installed successfully, feel free to check those awesome features!"
+msgstr "Плагин был успешно установлен, не стесняйтесь проверить его потрясающие возможности!"
+
+#: copy-delete-posts.php:819 copy-delete-posts.php:820
+msgid "There was an error and we couldn't kill the task."
+msgstr "Произошла ошибка, и нам не удалось завершить задание."
+
+#: copy-delete-posts.php:818
+msgid "The task has been killed"
+msgstr "Выполнение задания прекращено"
+
+#: copy-delete-posts.php:816 copy-delete-posts.php:817
+msgid "There was an error and we couldn't hide the task."
+msgstr "Произошла ошибка, и нам не удалось скрыть выполнение задания."
+
+#: copy-delete-posts.php:815
+msgid "The task has been hidden"
+msgstr "Выполнение задания было скрыто"
+
+#: copy-delete-posts.php:813 copy-delete-posts.php:814
+msgid "We couldn't update task list, please try again later or kill tasks individualy."
+msgstr "Нам не удалось обновить список заданий, пожалуйста, повторите попытку позже или отмените выполнение заданий по отдельности."
+
+#: copy-delete-posts.php:812
+msgid "Tasks cleared!"
+msgstr "Задачи выполнены!"
+
+#: copy-delete-posts.php:811
+msgid "This banner will not appear again, if any feature is missing you can ask for it on our support forum!"
+msgstr "Этот баннер больше не будет отображаться, в случае если вам не хватает какой-либо функции, вы можете обратиться на наш форум поддержки!"
+
+#: copy-delete-posts.php:810
+msgid "Alright! We will ask you again in 14 days!"
+msgstr "Хорошо! Мы обратимся к вам снова через 14 дней!"
+
+#: copy-delete-posts.php:808 copy-delete-posts.php:809
+msgid "Thank you very much for the review, this banner will not appear again!"
+msgstr "Спасибо большое за ваш обзор, этот баннер больше не появится!"
+
+#: copy-delete-posts.php:807
+msgid "Cannot send dismiss request. Are you connected to the internet?"
+msgstr "Не удается отправить запрос на отклонение. Вы подключены к Интернету?"
+
+#: copy-delete-posts.php:806
+msgid "There was an issue while dismissing banner, please do it next time again."
+msgstr "В процессе отключения баннера произошла ошибка, пожалуйста, повторите действие позже ещё раз."
+
+#: copy-delete-posts.php:741
+msgid "Manual Cleanup removed "
+msgstr "Ручная очистка удалена "
+
+#: copy-delete-posts.php:686
+msgid "Copy this post"
+msgstr "Копировать эту запись"
+
+#: copy-delete-posts.php:384 copy-delete-posts.php:414
+msgid "test"
+msgstr "тест"
+
+#: copy-delete-posts.php:347
+msgid "Copy & Delete Posts Menu"
+msgstr "Меню Copy & Delete Posts"
+
+#: copy-delete-posts.php:345 copy-delete-posts.php:347
+msgid "<span id=\"cdp-menu\">Copy & Delete Posts</span>"
+msgstr "<span id=\"cdp-menu\">Copy & Delete Posts</span>"
+
+#: copy-delete-posts.php:317 copy-delete-posts.php:512
+msgid "Copy this"
+msgstr "Копировать это"
+
+#: copy-delete-posts.php:248 copy-delete-posts.php:384
+#: copy-delete-posts.php:414 copy-delete-posts.php:438
+#: copy-delete-posts.php:460 menu/modal.php:207 menu/tooltips.php:268
+msgid "Copy"
+msgstr "Копировать"
+
+#: copy-delete-posts.php:902
+msgid "Please select basic settings for this copy."
+msgstr "Пожалуйста, выберите базовые настройки для этой копии."
+
+#: copy-delete-posts.php:901
+msgid "Please select at least one row to copy and try again."
+msgstr "Пожалуйста, выберите хотя бы одну строку для копирования и повторите попытку."
+
+#: copy-delete-posts.php:900
+msgid "Please select at least one row to copy."
+msgstr "Выберите хотя бы одну строку для копирования."
+
+#: copy-delete-posts.php:893
+msgid "–––––––––––––- END OF THE DEBUG OUTPUT –––––––––––––- "
+msgstr "-------------- КОНЕЦ ВЫВОДА РЕЗУЛЬТАТОВ ОТЛАДКИ -------------- "
+
+#: copy-delete-posts.php:892
+msgid "You're crazy! – Here is the output:"
+msgstr "Вы с ума сошли! - Вот выходные данные:"
+
+#: copy-delete-posts.php:891
+msgid "Are you REALLY sure?"
+msgstr "Вы ДЕЙСТВИТЕЛЬНО уверены?"
+
+#: copy-delete-posts.php:890
+msgid "This post is a duplicate of"
+msgstr "Эта публикация является дубликатом"
+
+#: copy-delete-posts.php:889
+msgid "Change the type of this copy <span class=\"cdp-premium-icon cdp-big-icon\"></span>"
+msgstr "Изменить тип этой копии <span class=\"cdp-premium-icon cdp-big-icon\"></span>"
+
+#: copy-delete-posts.php:888
+msgid "If you’re on a multisite you can copy it to other sites."
+msgstr "Если вы находитесь на мультисайте, вы можете скопировать его на другие сайты."
+
+#: copy-delete-posts.php:886 copy-delete-posts.php:887
+msgid "This is a Premium Feature.<br><a href=\"https://sellcodes.com/CylMIdJD\" target=\"_blank\">Check it out and upgrade today</a>,<br>we made it <b>really affordable!</b>"
+msgstr "Эта функция предоставляется премиум-пользователям.<br><a href=\"https://sellcodes.com/CylMIdJD\" target=\"_blank\">Оцените ее и обновите сегодня</a>, <br>мы сделали ее <b>действительно доступной!</b>"
+
+#: copy-delete-posts.php:885
+msgid "If you’re on a multisite you can copy it to other sites with the Premium Plugin. <a href=\"https://sellcodes.com/CylMIdJD\" target=\"_blank\">Order it now!</a>"
+msgstr "Если вы находитесь на мультисайте Вы можете копировать его на другие сайты с помощью Премиум плагина. <a href=\"https://sellcodes.com/CylMIdJD\" target=\"_blank\">Order it now!</a>"
+
+#: copy-delete-posts.php:884
+msgid "here"
+msgstr "здесь"
+
+#: copy-delete-posts.php:883
+msgid "Define your copy settings"
+msgstr "Определить настройки для своих копий"
+
+#: copy-delete-posts.php:882 menu/notifications.php:87
+msgid "Hide"
+msgstr "Скрыть"
+
+#: copy-delete-posts.php:881 menu/notifications.php:86
+msgid "Auto Cleaned-up"
+msgstr "Автоматическая очистка"
+
+#: copy-delete-posts.php:880 menu/notifications.php:86
+msgid "Deleted Posts"
+msgstr "Удалённые записи"
+
+#: copy-delete-posts.php:879 menu/notifications.php:56
+msgid "Kill"
+msgstr "Прервать"
+
+#: copy-delete-posts.php:878 menu/notifications.php:55
+msgid "Auto Cleaning-up"
+msgstr "Автоматическая очистка"
+
+#: copy-delete-posts.php:877 menu/notifications.php:55
+msgid "Deleting Posts"
+msgstr "Удаление записей"
+
+#: copy-delete-posts.php:876
+msgid "Change it to blank"
+msgstr "Изменить его на пустой"
+
+#: copy-delete-posts.php:875
+msgid "Change it to (Name of original)"
+msgstr "Изменить на (Название оригинала)"
+
+#: copy-delete-posts.php:874
+msgid "only if <u><b>not</b></u> empty"
+msgstr "только в случае, если <u><b>не</b></u> пустое"
+
+#: copy-delete-posts.php:873
+msgid "<b>including</b> empty"
+msgstr "<b>включая</b> пустой"
+
+#: copy-delete-posts.php:872
+msgid "Something went wrong and we couldn't send request, are you connected to the internet?"
+msgstr "Что-то пошло не так, и нам не удалось отправить запрос, вы подключены к интернету?"
+
+#: copy-delete-posts.php:871
+msgid "Something went wrong and we couldn't send request, please try refresh page and try again."
+msgstr "Что-то пошло не так и нам не удалось отправить запрос, пожалуйста, обновите страницу и попробуйте ещё раз."
+
+#: copy-delete-posts.php:870
+msgid "Unknown response, please try refresh the page!"
+msgstr "Ответ неизвестен, попробуйте обновить страницу!"
+
+#: copy-delete-posts.php:869
+msgid "License is valid, press the button again to activate!"
+msgstr "Лицензия действительна, для активации нажмите кнопку еще раз!"
+
+#: copy-delete-posts.php:868
+msgid "License is already active, let us reload the page!"
+msgstr "Лицензия уже активна, позвольте нам перезагрузить страницу!"
+
+#: copy-delete-posts.php:867
+msgid "Please enter license key, currently it is empty."
+msgstr "Пожалуйста, введите лицензионный ключ, в настоящее время он отсутствует."
+
+#: copy-delete-posts.php:866
+msgid "Something went wrong and we couldn't setup the deletion task. – Please check console for more info."
+msgstr "Что-то пошло не так и нам не удалось запустить задачу по удалению. - Для получения дополнительной информации проверьте, пожалуйста, консоль."
+
+#: copy-delete-posts.php:865
+msgid "– Please try without throttling."
+msgstr "- Попробуйте без регулирования."
+
+#: copy-delete-posts.php:864
+msgid "Something went wrong and we couldn't setup the deletion task."
+msgstr "Произошла ошибка и нам не удалось начать процес удаления."
+
+#: copy-delete-posts.php:863
+msgid "Deletion process started, you can close this page now and wait till the process ends!"
+msgstr "Процесс удаления начался, вы можете закрыть эту страницу и дождаться завершения процесса!"
+
+#: copy-delete-posts.php:862
+msgid "You have wrong count in throttling field, please fix."
+msgstr "В поле регулирования указано неверное значение, пожалуйста, исправьте."
+
+#: copy-delete-posts.php:861
+msgid "Nothing to do here, please select at least one post to delete."
+msgstr "Здесь нет никаких заданий, пожалуйста, выберите хотя бы одну публикацию для удаления."
+
+#: copy-delete-posts.php:860
+msgid "Please check that you completed all steps, before this task!"
+msgstr "Пожалуйста, перед выполнением этого задания убедитесь в том, что вы полностью осуществили все шаги!"
+
+#: copy-delete-posts.php:859
+msgid "No posts/pages meeting the current filter conditions."
+msgstr "Не найдено сообщений/страниц, соответствующих текущим условиям фильтрования."
+
+#: copy-delete-posts.php:858
+msgid "You did not select any filter.<br>Click <a href=\"#\" class=\"cdp-show-the-copies\">here</a> to show all copies (of the selected post type) made by this plugin."
+msgstr "Вы не выбрали ни одного фильтра.<br>Нажмите <a href=\"#\" class=\"cdp-show-the-copies\">здесь</a>, для отображения всех копий (выбранной вами публикации), сделанных этим плагином."
+
+#: copy-delete-posts.php:857
+msgid "Cannot connect to the server, premium filters will not be applied."
+msgstr "Невозможно подключиться к серверу, премиум-фильтры не будут использоваться."
+
+#: copy-delete-posts.php:856
+msgid "Please, check for: which duplicates you are looking for"
+msgstr "Пожалуйста, проверьте: какие дубликаты вы ищете"
+
+#: copy-delete-posts.php:855
+msgid "Something went wrong and we couldn't get post list. – Please check console for more info."
+msgstr "Что-то пошло не так, и нам не удалось получить список публикаций. - Для получения дополнительной информации проверьте, пожалуйста, консоль."
+
+#: copy-delete-posts.php:854
+msgid "There was an error while getting data from server, please try again."
+msgstr "При получении данных с сервера произошла ошибка, пожалуйста, попробуйте еще раз."
+
+#: copy-delete-posts.php:853 copy-delete-posts.php:906
+msgid "Copy in progress..."
+msgstr "Копирование идет..."
+
+#: copy-delete-posts.php:852
+msgid "Something went wrong and we couldn't get profile settings – please try again!"
+msgstr "Что-то пошло не так, и нам не удалось получить настройки профиля - пожалуйста, попробуйте еще раз!"
+
+#: copy-delete-posts.php:851
+msgid "Copy & Delete Post – Error"
+msgstr "Копирование и удаление записи - ошибка"
+
+#: copy-delete-posts.php:850
+msgid "Something went wrong and we couldn't get profile settings. – Check console for more details"
+msgstr "Что-то пошло не так, и нам не удалось получить настройки профиля. - Для получения дополнительной информации проверьте консоль"
+
+#: copy-delete-posts.php:849
+msgid "Unable to recognize selected profile, please try again."
+msgstr "Невозможно распознать выбранный профиль, попробуйте еще раз."
+
+#: copy-delete-posts.php:848 copy-delete-posts.php:905
+msgid "Couldn't recognize that button, please try again."
+msgstr "Не удалось распознать эту кнопку, попробуйте еще раз."
+
+#: copy-delete-posts.php:847 copy-delete-posts.php:904
+msgid "Something went wrong and we couldn't copy this post. – See dev console for more info."
+msgstr "Что-то пошло не так, и нам не удалось скопировать эту публикацию. - Для получения дополнительной информации обратитесь к консоли разработчика."
+
+#: copy-delete-posts.php:846 copy-delete-posts.php:903
+msgid "Something went wrong and we couldn't copy this post – please try again!"
+msgstr "Что-то пошло не так, и нам не удалось скопировать эту публикацию - пожалуйста, попробуйте еще раз!"
+
+#: copy-delete-posts.php:845
+msgid "You need to insert positive number for copies."
+msgstr "Вам необходимо указать положительное число копий."
+
+#: copy-delete-posts.php:844 menu/configuration.php:449
+#: menu/configuration.php:460
+msgid "(Name of original)"
+msgstr "(Название оригинала)"
+
+#: copy-delete-posts.php:843
+msgid "Something went wrong and we couldn't save your settings. – Please check console for more info."
+msgstr "Что-то пошло не так, и нам не удалось сохранить ваши настройки. - Для получения дополнительной информации проверьте, пожалуйста, консоль."
+
+#: copy-delete-posts.php:842
+msgid "Something went wrong and we couldn't save your settings."
+msgstr "Что-то пошло не так и нам не удалось сохранить ваши настройки."
+
+#: copy-delete-posts.php:841
+msgid "All your settings were saved!"
+msgstr "Все ваши настройки сохранены!"
+
+#: copy-delete-posts.php:840
+msgid "Something went wrong and we couldn't update intro settings. – Please check console for more info."
+msgstr "Что-то пошло не так и нам не удалось обновить настройки заставки. - Для получения дополнительной информации проверьте, пожалуйста, консоль."
+
+#: copy-delete-posts.php:839
+msgid "Something went wrong and we couldn't update intro settings – try again!"
+msgstr "Что-то пошло не так и нам не удалось обновить настройки заставки - пожалуйста, попробуйте еще раз!"
+
+#: copy-delete-posts.php:838
+msgid "Something went wrong and we couldn't save intro settings."
+msgstr "Что-то пошло не так и нам не удалось сохранить настройки заставки."
+
+#: copy-delete-posts.php:837
+msgid "Something went wrong and we couldn't save intro settings!"
+msgstr "Что-то пошло не так и нам не удалось сохранить настройки заставки!"
+
+#: copy-delete-posts.php:836
+msgid "No items to show, try with other filters!"
+msgstr "Элементы для отображения отсутствуют, попробуйте использовать другие фильтры!"
+
+#: menu/configuration.php:1013
+msgid "This will establish connection to the chat servers"
+msgstr "Будет установлено соединение с серверами чата"
+
+#: menu/configuration.php:1011
+msgid "Connect with support (click to load)"
+msgstr "Связаться со службой поддержки (щелкните для загрузки)"
+
+#. Description of the plugin
+#: copy-delete-posts.php
+msgid "The best solution to easily make duplicates of your posts & pages, and delete them in one go."
+msgstr "Лучшее решение для простого создания и удаления дубликатов ваших публикаций и страниц за одну операцию."
+
+#. Plugin URI of the plugin
+#: copy-delete-posts.php
+msgid "https://copy-delete-posts.com"
+msgstr "https://copy-delete-posts.com"
+
+#. Plugin Name of the plugin
+#: copy-delete-posts.php copy-delete-posts.php:345 copy-delete-posts.php:822
+#: copy-delete-posts.php:826
+msgid "Copy & Delete Posts"
+msgstr "Скопировать и удалить публикации"

@@ -1,0 +1,49 @@
+---
+description: 
+globs: *.ts, *.tsx, *.js, *.jsx
+alwaysApply: false
+---
+
+# General TypeScript Rules
+
+## Syntax and Functions
+
+- Use TypeScript for all new code; prefer `.ts` / `.tsx` over plain JavaScript files.
+- Prefer `const` by default and `let` only when reassignment is required; never use `var`.
+- Use `function` declarations for exported or reusable pure functions; use arrow functions for inline callbacks and small local helpers.
+- Omit semicolons; keep formatting consistent with the project Prettier config.
+- Prefer expression-style code where it stays readable (for example short ternaries, `&&` rendering in JSX) but avoid clever one-liners that hurt clarity.
+
+## Types and Interfaces
+
+- Prefer `interface` over `type` for object shapes and public contracts.
+- Use `type` for unions, primitives, and complex composed types.
+- Avoid `any`. Prefer `unknown` plus explicit narrowing, or a more specific domain type.
+- Avoid enums; use union literals with `Record`/maps instead.
+- Use discriminated unions for state machines and async statuses (for example `status: 'idle' | 'loading' | 'error' | 'success'`).
+
+## File and Component Structure
+
+- In React / React Native files, keep this order:
+  - Exported component (default or main export).
+  - Subcomponents.
+  - Helpers (pure functions, hooks).
+  - Static content/constants.
+  - Types and interfaces.
+- Keep files focused on a single responsibility; extract reusable logic into separate modules or hooks.
+
+## Control Flow and Error Handling
+
+- Handle errors and edge cases at the beginning of functions using guard clauses.
+- Use early returns for error or invalid states to avoid deep nesting.
+- Place the happy path last in the function for improved readability.
+- Avoid unnecessary `else` blocks when an earlier branch returns; use `if (condition) return ...` instead.
+- Implement proper logging and user-friendly error messages at edges (I/O, network, persistence).
+- Consider custom error classes or error factories for consistent error handling across the project.
+
+## Imports and Exports
+
+- Prefer named exports for modules; use default exports only when there is a single clear primary export.
+- Import from package or module entrypoints instead of deep internal paths whenever possible.
+- Keep import order stable: external libraries, internal packages, local modules, then styles/assets.
+- Don't use any for types (it's unsafe)

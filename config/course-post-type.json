@@ -1,0 +1,34 @@
+{
+  "slug": "course",
+  "rest_base": "course",
+  "rest_namespace": "wp/v2",
+  "rest_route": "/wp-json/wp/v2/course",
+  "labels": {
+    "name": "Курсы",
+    "singular_name": "Курс"
+  },
+  "supports": ["title", "editor", "excerpt", "thumbnail", "custom-fields"],
+  "taxonomy": {
+    "slug": "course_category",
+    "rest_base": "course_category",
+    "rest_route": "/wp-json/wp/v2/course_category"
+  },
+  "acf_field_group_key": "group_practicum_course_01",
+  "acf_post_type_key": "post_type_practicum_course",
+  "acf_fields": [
+    "preview",
+    "course_name",
+    "description",
+    "course_category",
+    "duration",
+    "teaser",
+    "materials",
+    "attachments"
+  ],
+  "acf_location": {
+    "param": "post_type",
+    "operator": "==",
+    "value": "course"
+  },
+  "registered_by_plugin": "wordpress/wp-content/plugins/practicum-courses/practicum-courses.php"
+}
