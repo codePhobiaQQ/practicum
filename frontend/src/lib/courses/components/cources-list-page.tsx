@@ -13,6 +13,7 @@ import { PracticumLayout } from './practicum-layout'
 
 const TAX_CATEGORY = 'cource-category'
 const TAX_SUBJECT = 'cource-subject'
+
 /** Потоки курса (в WP slug: cource-tread). */
 const TAX_STREAM = 'cource-tread'
 
