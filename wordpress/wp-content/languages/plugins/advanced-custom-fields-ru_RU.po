@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Advanced Custom Fields (ACF®) - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-12-15 17:05:20+0000\n"
+"PO-Revision-Date: 2026-05-09 06:17:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,30 @@ msgstr ""
 "X-Generator: GlotPress/4.0.3\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - Advanced Custom Fields (ACF®) - Stable (latest release)\n"
+
+#: src/AI/GEO/FieldSettings.php:95
+msgid "Missing required parameters"
+msgstr "Отсутствуют необходимые параметры"
+
+#: src/AI/GEO/GEO.php:65
+msgid "Schema"
+msgstr "Schema"
+
+#: src/AI/GEO/GEO.php:135
+msgid "All Types"
+msgstr "Все типы"
+
+#: src/Site_Health/Site_Health.php:395
+msgid "Enabled"
+msgstr "Включить"
+
+#: src/Site_Health/Site_Health.php:396
+msgid "Disabled"
+msgstr "Откл"
+
+#: includes/admin/views/acf-post-type/advanced-settings.php:35
+msgid "Notes"
+msgstr "Примечания"
 
 #: includes/admin/views/acf-field-group/options.php:271
 msgid "Display Title"
@@ -1648,6 +1672,12 @@ msgstr "Инструкции для редакторов. Отображаетс
 msgid "Dismiss permanently"
 msgstr "Отклонить навсегда"
 
+#. translators: %s - The clear log button opening HTML tag. %s - The closing
+#. HTML tag.
+#: includes/admin/views/escaped-html-notice.php:72
+msgid "This data is logged as we detect values that have been changed during output. %1$sClear log and dismiss%2$s after escaping the values in your code. The notice will reappear if we detect changed values again."
+msgstr "Эти данные записываются в журнал, когда мы обнаруживаем значения, которые были изменены во время вывода. %1$sОчистите журнал и закройте уведомление%2$s после экранирования значений в вашем коде. Уведомление появится снова, если мы снова обнаружим измененные значения."
+
 #: src/Site_Health/Site_Health.php:416
 msgid "License Activated"
 msgstr "Лицензия активирована"
@@ -1675,12 +1705,6 @@ msgstr "Интерфейс страниц настроек включен"
 #: src/Site_Health/Site_Health.php:798
 msgid "Standard"
 msgstr "Стадартный"
-
-#. translators: %s - The clear log button opening HTML tag. %s - The closing
-#. HTML tag.
-#: includes/admin/views/escaped-html-notice.php:72
-msgid "This data is logged as we detect values that have been changed during output. %1$sClear log and dismiss%2$s after escaping the values in your code. The notice will reappear if we detect changed values again."
-msgstr "Эти данные записываются в журнал, когда мы обнаруживаем значения, которые были изменены во время вывода. %1$sОчистите журнал и закройте уведомление%2$s после экранирования значений в вашем коде. Уведомление появится снова, если мы снова обнаружим измененные значения."
 
 #: src/Site_Health/Site_Health.php:798
 msgid "Light"
@@ -3956,13 +3980,13 @@ msgstr "Метабокс свойств"
 msgid "In the editor used for the title of the post attributes meta box."
 msgstr "Используется для заголовка метабокса свойств записи в редакторе."
 
-#: includes/admin/views/acf-post-type/advanced-settings.php:367
-msgid "Adds 'Post Type Archive' items with this label to the list of posts shown when adding items to an existing menu in a CPT with archives enabled. Only appears when editing menus in 'Live Preview' mode and a custom archive slug has been provided."
-msgstr "Добавляет элементы с меткой 'Архив элементов' в список записей, отображаемый при добавлении элементов в существующее меню в CPT с включенными архивами. Появляется только при редактировании меню в режиме 'Live Preview', если был задан пользовательский ярлык архива."
-
 #: includes/admin/views/acf-post-type/advanced-settings.php:401
 msgid "Featured Image Meta Box"
 msgstr "Метабокс изображения записи"
+
+#: includes/admin/views/acf-post-type/advanced-settings.php:367
+msgid "Adds 'Post Type Archive' items with this label to the list of posts shown when adding items to an existing menu in a CPT with archives enabled. Only appears when editing menus in 'Live Preview' mode and a custom archive slug has been provided."
+msgstr "Добавляет элементы с меткой 'Архив элементов' в список записей, отображаемый при добавлении элементов в существующее меню в CPT с включенными архивами. Появляется только при редактировании меню в режиме 'Live Preview', если был задан пользовательский ярлык архива."
 
 #: includes/admin/views/acf-post-type/advanced-settings.php:402
 msgid "In the editor used for the title of the featured image meta box."
@@ -4279,13 +4303,13 @@ msgstr "«Ярлык» — это вариант названия, подход�
 msgid "Describes the Parent field on the Edit Tags screen."
 msgstr "Описывает поле «Родитель» на странице редактирования меток."
 
-#: includes/admin/views/acf-taxonomy/advanced-settings.php:494
-msgid "Assigns the text displayed when clicking the 'choose from most used' text in the taxonomy meta box when no tags are available, and assigns the text used in the terms list table when there are no items for a taxonomy."
-msgstr "Назначает текст, отображаемый при нажатии на кнопку «выбрать из часто используемых» в метабоксе таксономии, если метки отсутствуют, и назначает текст, используемый в таблице списка терминов, если для таксономии нет элементов."
-
 #: includes/admin/views/acf-taxonomy/advanced-settings.php:582
 msgid "Description Field Description"
 msgstr "Описание поля описания"
+
+#: includes/admin/views/acf-taxonomy/advanced-settings.php:494
+msgid "Assigns the text displayed when clicking the 'choose from most used' text in the taxonomy meta box when no tags are available, and assigns the text used in the terms list table when there are no items for a taxonomy."
+msgstr "Назначает текст, отображаемый при нажатии на кнопку «выбрать из часто используемых» в метабоксе таксономии, если метки отсутствуют, и назначает текст, используемый в таблице списка терминов, если для таксономии нет элементов."
 
 #: includes/admin/views/acf-taxonomy/advanced-settings.php:583
 msgid "Describes the Description field on the Edit Tags screen."
@@ -4355,13 +4379,13 @@ msgstr "Пользовательский контроллер для испол�
 msgid "Invalid post type selected for review."
 msgstr "Для просмотра выбран неверный тип записи."
 
-#: includes/fields.php:429
-msgid "This allows you to select and display existing fields. It does not duplicate any fields in the database, but loads and displays the selected fields at run-time. The Clone field can either replace itself with the selected fields or display the selected fields as a group of subfields."
-msgstr "Позволяет выбирать и отображать существующие поля. Он не дублирует поля в базе данных, а загружает и отображает выбранные поля во время выполнения программы. Поле Дубликатор может либо заменять собой выбранные поля, либо отображать выбранные поля в виде группы вложенных полей."
-
 #: includes/fields.php:439
 msgid "This provides a simple, structured, layout-based editor. The Flexible Content field allows you to define, create and manage content with total control by using layouts and subfields to design the available blocks."
 msgstr "Обеспечивает простой, структурированный редактор на основе макетов. Поле «Гибкое содержимое» позволяет создавать и управлять содержимым с полным контролем, используя макеты и вложенные поля для оформления доступных блоков."
+
+#: includes/fields.php:429
+msgid "This allows you to select and display existing fields. It does not duplicate any fields in the database, but loads and displays the selected fields at run-time. The Clone field can either replace itself with the selected fields or display the selected fields as a group of subfields."
+msgstr "Позволяет выбирать и отображать существующие поля. Он не дублирует поля в базе данных, а загружает и отображает выбранные поля во время выполнения программы. Поле Дубликатор может либо заменять собой выбранные поля, либо отображать выбранные поля в виде группы вложенных полей."
 
 #: includes/admin/views/acf-post-type/advanced-settings.php:963
 msgid "Rename Capabilities"
@@ -7204,14 +7228,6 @@ msgstr "red : Красный"
 msgid "All post types"
 msgstr "Все типы записи"
 
-#. translators: %s number of field groups duplicated
-#: includes/admin/post-types/admin-field-groups.php:372
-msgid "Field group duplicated."
-msgid_plural "%s field groups duplicated."
-msgstr[0] "% группа полей продублирована."
-msgstr[1] "%s группы полей продублировано."
-msgstr[2] "%s групп полей продублировано."
-
 #: includes/fields/class-acf-field-date_time_picker.php:92
 msgctxt "Date Time Picker JS pmTextShort"
 msgid "P"
@@ -7247,6 +7263,14 @@ msgstr[2] "%1$s требует выбора как минимум %2$s элем
 msgctxt "verb"
 msgid "Select"
 msgstr "Выбрать"
+
+#. translators: %s number of field groups duplicated
+#: includes/admin/post-types/admin-field-groups.php:372
+msgid "Field group duplicated."
+msgid_plural "%s field groups duplicated."
+msgstr[0] "группа полей продублирована."
+msgstr[1] "%s группы полей продублировано."
+msgstr[2] "%s групп полей продублировано."
 
 #. Plugin Name of the plugin
 #: acf.php acf.php:347

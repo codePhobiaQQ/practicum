@@ -19,10 +19,8 @@ services:
       - wpsite
 
   #-----------------------
-
   db:
     image: mysql:5.7
-    # platform: linux/amd64
     volumes:
       - db_data:/var/lib/mysql
     restart: always
@@ -36,7 +34,6 @@ services:
 
   #-----------------------
   phpmyadmin:
-    # platform: linux/amd64
     depends_on:
       - db
     image: phpmyadmin
@@ -54,6 +51,7 @@ services:
   wordpress:
     depends_on:
       - db
+      - elasticsearch
     image: wordpress:latest
     ports:
       - '9091:80'
@@ -72,9 +70,38 @@ services:
     networks:
       - wpsite
 
+  #-----------------------
+  elasticsearch:
+    image: elasticsearch:8.13.0
+    restart: always
+    ports:
+      - '9200:9200'
+    environment:
+      - discovery.type=single-node      # одна нода, dev-режим
+      - xpack.security.enabled=false    # без SSL и пароля, для разработки
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m  # лимит памяти
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    networks:
+      - wpsite
+
+  #-----------------------
+  kibana:
+    image: kibana:8.13.0
+    restart: always
+    depends_on:
+      - elasticsearch
+    ports:
+      - '5601:5601'
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    networks:
+      - wpsite
+
 
 networks:
   wpsite:
 
 volumes:
   db_data:
+  es_data:
