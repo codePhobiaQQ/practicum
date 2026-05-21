@@ -22,4 +22,8 @@ export const routes: {
       path: '/courses/:slug',
       element: <CourseDetailPage />,
     },
+    {
+    path: '/courses',
+    element: <CourcesListPage />,
+  },
   ]

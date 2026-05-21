@@ -1,7 +1,7 @@
 import { Col, Empty, Input, Row, Spin } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import { useEffect, useMemo, useState } from 'react'
-import { fetchCourses, fetchTaxonomyTerms } from '@shared/api/wordpress'
+import { fetchCourses, fetchTaxonomyTerms, searchCourses  } from '@shared/api/wordpress'
 import {
   toCourseViewModel,
   type CourseTermMaps,
@@ -17,11 +17,11 @@ const TAX_SUBJECT = 'cource-subject'
 /** Потоки курса (в WP slug: cource-tread). */
 const TAX_STREAM = 'cource-tread'
 
-function stripHtml(html: string): string {
-  const div = document.createElement('div')
-  div.innerHTML = html
-  return div.textContent ?? ''
-}
+// function stripHtml(html: string): string {
+//   const div = document.createElement('div')
+//   div.innerHTML = html
+//   return div.textContent ?? ''
+// }
 
 function sortTermsRu(terms: WpTaxonomyTerm[]): WpTaxonomyTerm[] {
   return [...terms].sort((a, b) => a.name.localeCompare(b.name, 'ru'))
@@ -57,25 +57,25 @@ function courseMatchesFilters(
   return true
 }
 
-function courseMatchesSearch(course: CourseViewModel, q: string): boolean {
-  const needle = q.trim().toLowerCase()
-  if (!needle) {
-    return true
-  }
-  const blob = [
-    course.title,
-    course.subtitle,
-    course.teaser,
-    stripHtml(course.excerptHtml),
-    course.categoryLabel,
-    ...course.subjectLabels,
-    ...course.streamLabels,
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase()
-  return blob.includes(needle)
-}
+// function courseMatchesSearch(course: CourseViewModel, q: string): boolean {
+//   const needle = q.trim().toLowerCase()
+//   if (!needle) {
+//     return true
+//   }
+//   const blob = [
+//     course.title,
+//     course.subtitle,
+//     course.teaser,
+//     stripHtml(course.excerptHtml),
+//     course.categoryLabel,
+//     ...course.subjectLabels,
+//     ...course.streamLabels,
+//   ]
+//     .filter(Boolean)
+//     .join(' ')
+//     .toLowerCase()
+//   return blob.includes(needle)
+// }
 
 const navBtn =
   'w-full shrink-0 rounded-full border px-3.5 py-2 text-left text-[14px] transition-colors md:rounded-l-none md:rounded-r-lg md:py-2.5 md:pl-4 md:pr-3'
@@ -95,6 +95,8 @@ export function CourcesListPage() {
   const [subjectId, setSubjectId] = useState<number | 'all'>('all')
   const [streamId, setStreamId] = useState<number | 'all'>('all')
   const [search, setSearch] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
+  const [searchLoading, setSearchLoading] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -131,13 +133,49 @@ export function CourcesListPage() {
     }
   }, [])
 
-  const filteredCourses = useMemo(
-    () =>
-      courses.filter(
-        (c) => courseMatchesFilters(c, categoryId, subjectId, streamId) && courseMatchesSearch(c, search),
-      ),
-    [courses, categoryId, subjectId, streamId, search],
-  )
+  // Debounce: ждём 400мс после последнего нажатия клавиши
+useEffect(() => {
+  const timer = setTimeout(() => setDebouncedSearch(search), 400)
+  return () => clearTimeout(timer)
+}, [search])
+
+// Поиск через ElasticSearch при изменении запроса
+useEffect(() => {
+  if (debouncedSearch.trim() === '') {
+    // запрос очищен — восстанавливаем полный список
+    let cancelled = false
+    setSearchLoading(true)
+    fetchCourses().then((posts) => {
+      if (cancelled) return
+      const maps = toTermMaps(categoryTerms, subjectTerms, streamTerms)
+      setCourses(posts.map((p) => toCourseViewModel(p, maps)))
+    })
+    .finally(() => {
+      if (!cancelled) setSearchLoading(false)
+    })
+    return () => { cancelled = true }
+  }
+  let cancelled = false
+  setSearchLoading(true)
+  searchCourses(debouncedSearch)
+    .then(({ courses: found }) => {
+      if (cancelled) return
+      const maps = toTermMaps(categoryTerms, subjectTerms, streamTerms)
+      setCourses(found.map((p) => toCourseViewModel(p, maps)))
+    })
+    .catch(() => {
+      if (!cancelled) setError('Ошибка поиска. Попробуйте ещё раз.')
+    })
+    .finally(() => {
+      if (!cancelled) setSearchLoading(false)
+    })
+  return () => { cancelled = true }
+}, [debouncedSearch])
+
+const filteredCourses = useMemo(
+  () => courses.filter((c) => courseMatchesFilters(c, categoryId, subjectId, streamId)),
+  [courses, categoryId, subjectId, streamId],
+)
 
   const heroTitle = useMemo(() => {
     if (categoryId !== 'all') {
@@ -279,7 +317,7 @@ export function CourcesListPage() {
             </aside>
 
             <div className="min-w-0">
-              {loading ? (
+              {loading || searchLoading ? (
                 <div className="flex justify-center py-20">
                   <Spin size="large" />
                 </div>

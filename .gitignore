@@ -42,7 +42,6 @@ logs/
 *.log
 
 # WordPress (runtime & uploads; adjust if you version custom themes/plugins fully)
-wordpress/wp-content/uploads/
 wordpress/wp-content/upgrade/
 wordpress/wp-content/cache/
 wordpress/wp-content/backup*/
