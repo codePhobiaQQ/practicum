@@ -1,0 +1,34 @@
+{
+  "slug": "book",
+  "rest_base": "book",
+  "rest_namespace": "wp/v2",
+  "rest_route": "/wp-json/wp/v2/book",
+  "labels": {
+    "name": "Пособия",
+    "singular_name": "Пособие"
+  },
+  "supports": ["title", "editor", "excerpt", "thumbnail", "custom-fields"],
+  "taxonomy": {
+    "slug": "book_category",
+    "rest_base": "book_category",
+    "rest_route": "/wp-json/wp/v2/book_category"
+  },
+  "acf_field_group_key": "group_practicum_book_01",
+  "acf_post_type_key": "post_type_practicum_book",
+  "acf_fields": [
+    "preview",
+    "book_name",
+    "description",
+    "book_category",
+    "duration",
+    "teaser",
+    "materials",
+    "attachments"
+  ],
+  "acf_location": {
+    "param": "post_type",
+    "operator": "==",
+    "value": "book"
+  },
+  "registered_by_plugin": "wordpress/wp-content/plugins/practicum-books/practicum-books.php"
+}

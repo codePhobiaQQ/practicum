@@ -1,0 +1,321 @@
+[
+  {
+    "key": "group_practicum_book_01",
+    "title": "Пособие (book)",
+    "fields": [
+      {
+        "key": "field_pb_preview",
+        "label": "Превью",
+        "name": "preview",
+        "type": "image",
+        "instructions": "Картинка для карточки и шапки (если нет обложки записи)",
+        "required": 0,
+        "return_format": "url",
+        "preview_size": "large",
+        "library": "all"
+      },
+      {
+        "key": "field_pb_book_name",
+        "label": "Название",
+        "name": "book_name",
+        "type": "text",
+        "instructions": "Отображаемое название (если пусто — заголовок записи)",
+        "required": 0
+      },
+      {
+        "key": "field_pb_description",
+        "label": "Описание",
+        "name": "description",
+        "type": "wysiwyg",
+        "instructions": "Полное описание пособия",
+        "required": 0,
+        "tabs": "all",
+        "toolbar": "full",
+        "media_upload": 1
+      },
+      {
+        "key": "field_pb_book_category",
+        "label": "Категория",
+        "name": "book_category",
+        "type": "taxonomy",
+        "instructions": "Рубрика пособия",
+        "required": 0,
+        "taxonomy": "book_category",
+        "field_type": "select",
+        "allow_null": 1,
+        "add_term": 1,
+        "save_terms": 1,
+        "load_terms": 1,
+        "return_format": "object",
+        "multiple": 0
+      },
+      {
+        "key": "field_pb_duration",
+        "label": "Длительность",
+        "name": "duration",
+        "type": "text",
+        "instructions": "Например: 10 месяцев",
+        "required": 0
+      },
+      {
+        "key": "field_pb_teaser",
+        "label": "Краткий анонс",
+        "name": "teaser",
+        "type": "textarea",
+        "instructions": "Для карточки в списке",
+        "required": 0,
+        "rows": 4,
+        "new_lines": "br"
+      },
+      {
+        "key": "field_pb_materials_outer",
+        "label": "Материалы (программа)",
+        "name": "materials",
+        "type": "repeater",
+        "instructions": "Структура: модуль → уроки → блоки материалов",
+        "required": 0,
+        "layout": "block",
+        "button_label": "Добавить модуль",
+        "sub_fields": [
+          {
+            "key": "field_pb_module_title",
+            "label": "Название модуля",
+            "name": "module_title",
+            "type": "text",
+            "required": 1
+          },
+          {
+            "key": "field_pb_lessons",
+            "label": "Уроки",
+            "name": "lessons",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Добавить урок",
+            "sub_fields": [
+              {
+                "key": "field_pb_lesson_title",
+                "label": "Название урока",
+                "name": "lesson_title",
+                "type": "text",
+                "required": 1
+              },
+              {
+                "key": "field_pb_lesson_slug",
+                "label": "Слаг урока (опционально)",
+                "name": "lesson_slug",
+                "type": "text",
+                "required": 0
+              },
+              {
+                "key": "field_pb_lesson_blocks",
+                "label": "Блоки урока",
+                "name": "lesson_blocks",
+                "type": "repeater",
+                "layout": "block",
+                "button_label": "Добавить блок",
+                "sub_fields": [
+                  {
+                    "key": "field_pb_material_block_type",
+                    "label": "Тип блока",
+                    "name": "block_type",
+                    "type": "select",
+                    "required": 1,
+                    "choices": {
+                      "text": "Текст",
+                      "video": "Видео",
+                      "file": "Файл",
+                      "quiz_ref": "Квиз (внешний ID)"
+                    },
+                    "default_value": "text",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 1
+                  },
+                  {
+                    "key": "field_pb_material_text",
+                    "label": "Текст",
+                    "name": "text_content",
+                    "type": "wysiwyg",
+                    "required": 0,
+                    "conditional_logic": [
+                      [
+                        {
+                          "field": "field_pb_material_block_type",
+                          "operator": "==",
+                          "value": "text"
+                        }
+                      ]
+                    ],
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1
+                  },
+                  {
+                    "key": "field_pb_material_video_url",
+                    "label": "URL видео",
+                    "name": "video_url",
+                    "type": "url",
+                    "required": 0,
+                    "conditional_logic": [
+                      [
+                        {
+                          "field": "field_pb_material_block_type",
+                          "operator": "==",
+                          "value": "video"
+                        }
+                      ]
+                    ]
+                  },
+                  {
+                    "key": "field_pb_material_file",
+                    "label": "Файл",
+                    "name": "file",
+                    "type": "file",
+                    "required": 0,
+                    "conditional_logic": [
+                      [
+                        {
+                          "field": "field_pb_material_block_type",
+                          "operator": "==",
+                          "value": "file"
+                        }
+                      ]
+                    ],
+                    "return_format": "url",
+                    "library": "all"
+                  },
+                  {
+                    "key": "field_pb_material_quiz_ref",
+                    "label": "ID / ключ квиза",
+                    "name": "quiz_ref",
+                    "type": "text",
+                    "required": 0,
+                    "conditional_logic": [
+                      [
+                        {
+                          "field": "field_pb_material_block_type",
+                          "operator": "==",
+                          "value": "quiz_ref"
+                        }
+                      ]
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "field_pb_attachments",
+        "label": "Вложения",
+        "name": "attachments",
+        "type": "gallery",
+        "instructions": "Галерея файлов и изображений",
+        "required": 0,
+        "return_format": "array",
+        "preview_size": "medium",
+        "insert": "append",
+        "library": "all"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "book"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Поля для CPT book. Аналогично структуре courses.",
+    "show_in_rest": 1
+  },
+  {
+    "key": "post_type_practicum_book",
+    "title": "Пособия",
+    "menu_order": 0,
+    "active": true,
+    "post_type": "book",
+    "advanced_configuration": false,
+    "labels": {
+      "name": "Пособия",
+      "singular_name": "пособие",
+      "menu_name": "Пособия",
+      "all_items": "Все пособия",
+      "edit_item": "Изменить пособие",
+      "view_item": "Посмотреть пособие",
+      "view_items": "Посмотреть пособия",
+      "add_new_item": "Добавить пособие",
+      "add_new": "Добавить пособие",
+      "new_item": "Новое пособие",
+      "parent_item_colon": "Родитель:",
+      "search_items": "Поиск пособий",
+      "not_found": "Пособия не найдены",
+      "not_found_in_trash": "В корзине не найдено",
+      "archives": "Архив пособий",
+      "attributes": "Атрибуты пособия",
+      "insert_into_item": "Вставить в пособие",
+      "uploaded_to_this_item": "Загружено в это пособие",
+      "filter_items_list": "Фильтровать список пособий",
+      "filter_by_date": "Фильтр по дате",
+      "items_list_navigation": "Пособия — навигация",
+      "items_list": "Список пособий",
+      "item_published": "Пособие опубликовано.",
+      "item_published_privately": "Пособие опубликовано приватно.",
+      "item_reverted_to_draft": "Пособие в черновике.",
+      "item_scheduled": "Пособие запланировано.",
+      "item_updated": "Пособие обновлено.",
+      "item_link": "Ссылка на пособие",
+      "item_link_description": "Ссылка на пособие"
+    },
+    "description": "",
+    "public": true,
+    "hierarchical": false,
+    "exclude_from_search": false,
+    "publicly_queryable": true,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_admin_bar": true,
+    "show_in_nav_menus": true,
+    "show_in_rest": true,
+    "rest_base": "book",
+    "rest_namespace": "wp/v2",
+    "rest_controller_class": "WP_REST_Posts_Controller",
+    "menu_icon": {
+      "type": "dashicons",
+      "value": "dashicons-book"
+    },
+    "rename_capabilities": false,
+    "singular_capability_name": "post",
+    "plural_capability_name": "posts",
+    "supports": [
+      "title",
+      "editor",
+      "thumbnail",
+      "excerpt",
+      "custom-fields"
+    ],
+    "taxonomies": "",
+    "has_archive": true,
+    "rewrite": {
+      "permalink_rewrite": "post_type_key",
+      "with_front": "1",
+      "feeds": "0",
+      "pages": "1"
+    },
+    "query_var": "post_type_key",
+    "can_export": true,
+    "delete_with_user": false,
+    "register_meta_box_cb": "",
+    "enter_title_here": ""
+  }
+]
