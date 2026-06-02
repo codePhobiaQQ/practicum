@@ -7,9 +7,9 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import axios from 'axios'
 import { notification } from 'antd'
 import { jwtDecode } from 'jwt-decode'
+import { getWordPressAuthErrorMessage, login as authLogin } from '@lib/auth/model/api'
 import { USER_LOCALSTORAGE_KEY } from '@shared/config/storage'
 import type { AuthSchema, UserSchema } from './types'
 
@@ -40,8 +40,7 @@ interface AppStateProviderProps {
 }
 
 function getErrorMessage(e: unknown): string {
-  const err = e as { response?: { data?: { message?: string } }; message?: string }
-  const msg = err?.response?.data?.message ?? err?.message ?? 'Неизвестная ошибка'
+  const msg = getWordPressAuthErrorMessage(e)
   notification.error({ message: msg })
   return msg
 }
@@ -81,13 +80,8 @@ export function AppStateProvider(props: AppStateProviderProps) {
   const login = useCallback(
     async (credentials: { username: string; password: string }) => {
       try {
-        const { data } = await axios.post<{ token: string }>(
-          'http://localhost:9091/wp-json/jwt-auth/v1/token',
-          credentials
-        )
-        console.log('data', data)
-
-        localStorage.setItem(USER_LOCALSTORAGE_KEY, data.token)
+        const token = await authLogin(credentials)
+        localStorage.setItem(USER_LOCALSTORAGE_KEY, token)
         notification.success({ message: 'Авторизация успешно пройдена' })
         await initAuthData()
       } catch (e: unknown) {
