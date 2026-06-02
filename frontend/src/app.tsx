@@ -1,21 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
 import { routes } from '@app/routes'
-import { PersonalAccountLayout } from '@/app/layouts/personal-account-layout'
-import { AuthOnly } from '@app/providers'
 import { Suspense } from 'react'
 import { PageLoader } from '@shared/components/loaders/PageLoader/PageLoader'
+import { AuthScreen } from '@/lib/auth'
+import { useIsAuth } from '@shared/lib/hooks/useIsAuth'
 import '@shared/styles/index.scss'
 
 const RoutesItems = routes.map((route) => {
   let finalComponent = route.element
-
-  if (route.layoutVariant === 'personalAccount') {
-    finalComponent = (
-      <AuthOnly>
-        <PersonalAccountLayout>{route.element}</PersonalAccountLayout>
-      </AuthOnly>
-    )
-  }
 
   return (
     <Route
@@ -27,9 +19,17 @@ const RoutesItems = routes.map((route) => {
 })
 
 function App() {
-  return (
-    <Routes>{RoutesItems}</Routes>
-  )
+  const { isAuth, isReady } = useIsAuth()
+
+  if (!isReady) {
+    return <PageLoader />
+  }
+
+  if (!isAuth) {
+    return <AuthScreen />
+  }
+
+  return <Routes>{RoutesItems}</Routes>
 }
 
 export default App

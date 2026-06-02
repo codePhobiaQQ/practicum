@@ -1,0 +1,70 @@
+@base = http://localhost:9091/wp-json
+@password = TestPassword123!
+# Поменяйте email, если пользователь уже есть в БД (или удалите пользователя в админке).
+@email = wp-http-test@example.com
+
+# Успешная регистрация требует плагины Config, JWT и Moodle (createMoodleUser).
+# Иначе будет 500 на шаге создания пользователя в Moodle.
+
+### Registration
+POST {{base}}/custom/v2/auth/registration
+Content-Type: application/json
+
+{
+  "username": "{{email}}",
+  "password": "{{password}}",
+  "role": "subscriber",
+  "user_name": "Тест Тестович",
+  "group_number": "ПК-101"
+}
+
+### Registration — без user_name / group_number (ожидается 400)
+POST {{base}}/custom/v2/auth/registration
+Content-Type: application/json
+
+{
+  "username": "other-{{email}}",
+  "password": "{{password}}"
+}
+
+### Registration — user_name только пробелы (ожидается 400 missing_params)
+POST {{base}}/custom/v2/auth/registration
+Content-Type: application/json
+
+{
+  "username": "trim-{{email}}",
+  "password": "{{password}}",
+  "role": "subscriber",
+  "user_name": "   ",
+  "group_number": "ПК-1"
+}
+
+### Registration — тот же username (ожидается 400 user_exists; после успешного «Registration»)
+POST {{base}}/custom/v2/auth/registration
+Content-Type: application/json
+
+{
+  "username": "{{email}}",
+  "password": "{{password}}",
+  "role": "subscriber",
+  "user_name": "Другой ФИО",
+  "group_number": "ПК-202"
+}
+
+### Login (скопируйте token из ответа для других запросов с Bearer, если понадобится)
+POST {{base}}/custom/v2/auth/login
+Content-Type: application/json
+
+{
+  "username": "{{email}}",
+  "password": "{{password}}"
+}
+
+### Login — неверный пароль (ожидается 403 или 401)
+POST {{base}}/custom/v2/auth/login
+Content-Type: application/json
+
+{
+  "username": "{{email}}",
+  "password": "wrong-password"
+}

@@ -1,1 +1,0 @@
-export { Departure } from './departure'

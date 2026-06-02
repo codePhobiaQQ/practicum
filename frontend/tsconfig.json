@@ -31,7 +31,7 @@
         "public/*"
       ],
       "@assets/*": [
-        "src/shared/assets/*"
+        "public/assets/*"
       ],
       "@shared/*": [
         "src/shared/*"

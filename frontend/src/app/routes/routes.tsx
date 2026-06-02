@@ -1,6 +1,10 @@
 import { ReactNode } from 'react'
 import { LayoutsType } from '@shared/types/layouts'
 import { CourcesListPage, CourseDetailPage } from '@lib/courses'
+import { ProfilePage } from '@lib/profile'
+import { BOOKS_DETAIL_ROUTE_PATH, BOOKS_ROUTE_PATH } from '@shared/config/books'
+import { BooksListPage } from '@/lib/books/components/books-list-page'
+import { BookDetailsPage } from '@/lib/books/components/book-details-page'
 
 export const getQuickNavigationRoute = () => "/personal-account"
 
@@ -15,6 +19,10 @@ export const routes: {
       path: '/',
       element: <CourcesListPage />,
     },
+    {
+      path: BOOKS_ROUTE_PATH,
+      element: <BooksListPage />,
+    },
     // -----------------
     // PUBLIC — курсы (WordPress)
     // -----------------
@@ -23,7 +31,17 @@ export const routes: {
       element: <CourseDetailPage />,
     },
     {
+<<<<<<< HEAD
     path: '/courses',
     element: <CourcesListPage />,
   },
+=======
+      path: BOOKS_DETAIL_ROUTE_PATH,
+      element: <BookDetailsPage />,
+    },
+    {
+      path: '/profile',
+      element: <ProfilePage />,
+    },
+>>>>>>> origin/changes
   ]

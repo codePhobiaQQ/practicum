@@ -1,1 +1,1 @@
-export type LayoutsType = 'default' | 'personalAccount'
+export type LayoutsType = 'personalAccount'
