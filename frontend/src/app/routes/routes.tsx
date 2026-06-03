@@ -31,11 +31,6 @@ export const routes: {
       element: <CourseDetailPage />,
     },
     {
-<<<<<<< HEAD
-    path: '/courses',
-    element: <CourcesListPage />,
-  },
-=======
       path: BOOKS_DETAIL_ROUTE_PATH,
       element: <BookDetailsPage />,
     },
@@ -43,5 +38,4 @@ export const routes: {
       path: '/profile',
       element: <ProfilePage />,
     },
->>>>>>> origin/changes
   ]

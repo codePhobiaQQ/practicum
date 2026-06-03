@@ -1,11 +1,7 @@
 import { Col, Empty, Row, Select, Spin } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
-<<<<<<< HEAD
 import { fetchCourses, fetchTaxonomyTerms, searchCourses  } from '@shared/api/wordpress'
-=======
-import { fetchCourses, fetchTaxonomyTerms } from '@shared/api/wordpress'
 import { OlympAppLayout } from '@/app/layouts'
->>>>>>> origin/changes
 import {
   toCourseViewModel,
   type CourseTermMaps,
@@ -20,13 +16,6 @@ const TAX_SUBJECT = 'cource-subject'
 /** Потоки курса (в WP slug: cource-tread). */
 const TAX_STREAM = 'cource-tread'
 
-<<<<<<< HEAD
-// function stripHtml(html: string): string {
-//   const div = document.createElement('div')
-//   div.innerHTML = html
-//   return div.textContent ?? ''
-// }
-=======
 const filterSelectClassName = [
   /* selector box */
   '[&_.ant-select-selector]:!h-[50px]',
@@ -55,7 +44,6 @@ const filterSelectClassName = [
   '[&_.ant-select-selection-item]:!top-auto',
   '[&_.ant-select-selection-item]:!transform-none',
 ].join(' ')
->>>>>>> origin/changes
 
 function sortTermsRu(terms: WpTaxonomyTerm[]): WpTaxonomyTerm[] {
   return [...terms].sort((a, b) => a.name.localeCompare(b.name, 'ru'))
@@ -91,36 +79,6 @@ function courseMatchesFilters(
   return true
 }
 
-<<<<<<< HEAD
-// function courseMatchesSearch(course: CourseViewModel, q: string): boolean {
-//   const needle = q.trim().toLowerCase()
-//   if (!needle) {
-//     return true
-//   }
-//   const blob = [
-//     course.title,
-//     course.subtitle,
-//     course.teaser,
-//     stripHtml(course.excerptHtml),
-//     course.categoryLabel,
-//     ...course.subjectLabels,
-//     ...course.streamLabels,
-//   ]
-//     .filter(Boolean)
-//     .join(' ')
-//     .toLowerCase()
-//   return blob.includes(needle)
-// }
-
-const navBtn =
-  'w-full shrink-0 rounded-full border px-3.5 py-2 text-left text-[14px] transition-colors md:rounded-l-none md:rounded-r-lg md:py-2.5 md:pl-4 md:pr-3'
-const navBtnActive =
-  `${navBtn} border-accent1 bg-practicum-mist font-semibold text-accent1 md:border-l-4 md:border-l-accent1 md:border-y md:border-r md:border-light-border md:bg-white`
-const navBtnIdle =
-  `${navBtn} border-transparent font-medium text-light-text hover:bg-practicum-mist/80 md:border-y md:border-r md:border-transparent`
-
-=======
->>>>>>> origin/changes
 export function CourcesListPage() {
   const [loading, setLoading] = useState(true)
   const [courses, setCourses] = useState<CourseViewModel[]>([])
@@ -131,12 +89,9 @@ export function CourcesListPage() {
   const [categoryId, setCategoryId] = useState<number | 'all'>('all')
   const [subjectId, setSubjectId] = useState<number | 'all'>('all')
   const [streamId, setStreamId] = useState<number | 'all'>('all')
-<<<<<<< HEAD
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [searchLoading, setSearchLoading] = useState(false)
-=======
->>>>>>> origin/changes
 
   useEffect(() => {
     let cancelled = false
@@ -173,8 +128,7 @@ export function CourcesListPage() {
     }
   }, [])
 
-<<<<<<< HEAD
-  // Debounce: ждём 400мс после последнего нажатия клавиши
+// Debounce: ждём 400мс после последнего нажатия клавиши
 useEffect(() => {
   const timer = setTimeout(() => setDebouncedSearch(search), 400)
   return () => clearTimeout(timer)
@@ -217,12 +171,7 @@ const filteredCourses = useMemo(
   () => courses.filter((c) => courseMatchesFilters(c, categoryId, subjectId, streamId)),
   [courses, categoryId, subjectId, streamId],
 )
-=======
-  const filteredCourses = useMemo(
-    () => courses.filter((c) => courseMatchesFilters(c, categoryId, subjectId, streamId)),
-    [courses, categoryId, subjectId, streamId],
-  )
->>>>>>> origin/changes
+
 
   const courseFilters = (
     <div className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5" aria-label="Фильтры каталога">
@@ -260,151 +209,14 @@ const filteredCourses = useMemo(
   )
 
   return (
-    <OlympAppLayout activeNav="labs">
+   <OlympAppLayout activeNav="labs">
       <div className="catalog-page prisma prisma_theme_light">
         {courseFilters}
 
-<<<<<<< HEAD
-        <div className="flex flex-col items-center gap-4 px-4 py-8">
-          <div className="w-full flex justify-center">
-            <Input
-              size="large"
-              allowClear
-              placeholder="Поиск по курсам"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              prefix={<SearchOutlined className="text-light-text-secondary" aria-hidden />}
-              className="max-w-full md:max-w-xl [&_.ant-input]:text-[15px]"
-            />
-          </div>
-
-          <div
-            id="courses-catalog"
-            className="mx-auto grid max-w-[1320px] scroll-mt-24 gap-8 md:grid-cols-[minmax(0,240px)_minmax(0,1fr)] md:gap-10 md:px-6 md:py-10 lg:grid-cols-[minmax(0,260px)_minmax(0,1fr)] lg:gap-14"
-          >
-            <aside className="min-w-0 md:sticky md:top-[4.5rem] md:self-start">
-              <div className="mb-8">
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-light-text-secondary">
-                  Категории
-                </p>
-                <nav
-                  className="flex flex-row gap-2 overflow-x-auto pb-1 md:flex-col md:gap-0 md:overflow-visible md:pb-0"
-                  aria-label="Категории курсов"
-                >
-                  <button
-                    type="button"
-                    className={categoryId === 'all' ? navBtnActive : navBtnIdle}
-                    onClick={() => setCategoryId('all')}
-                  >
-                    Все курсы
-                  </button>
-
-                  {categoryTerms.map((t) => {
-                    const active = categoryId === t.id
-                    return (
-                      <button
-                        key={t.id}
-                        type="button"
-                        className={active ? navBtnActive : navBtnIdle}
-                        onClick={() => setCategoryId(t.id)}
-                      >
-                        {t.name}
-                      </button>
-                    )
-                  })}
-                </nav>
-              </div>
-
-              <div className="mb-8">
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-light-text-secondary">
-                  Предметы
-                </p>
-                <nav
-                  className="flex flex-row gap-2 overflow-x-auto pb-1 md:flex-col md:gap-0 md:overflow-visible md:pb-0"
-                  aria-label="Предметы курсов"
-                >
-                  <button
-                    type="button"
-                    className={subjectId === 'all' ? navBtnActive : navBtnIdle}
-                    onClick={() => setSubjectId('all')}
-                  >
-                    Все предметы
-                  </button>
-                  {subjectTerms.map((t) => {
-                    const active = subjectId === t.id
-                    return (
-                      <button
-                        key={t.id}
-                        type="button"
-                        className={active ? navBtnActive : navBtnIdle}
-                        onClick={() => setSubjectId(t.id)}
-                      >
-                        {t.name}
-                      </button>
-                    )
-                  })}
-                </nav>
-              </div>
-
-              <div>
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-light-text-secondary">
-                  Потоки
-                </p>
-                <nav
-                  className="flex flex-row gap-2 overflow-x-auto pb-1 md:flex-col md:gap-0 md:overflow-visible md:pb-0"
-                  aria-label="Потоки курсов"
-                >
-                  <button
-                    type="button"
-                    className={streamId === 'all' ? navBtnActive : navBtnIdle}
-                    onClick={() => setStreamId('all')}
-                  >
-                    Все потоки
-                  </button>
-
-                  {streamTerms.map((t) => {
-                    const active = streamId === t.id
-                    return (
-                      <button
-                        key={t.id}
-                        type="button"
-                        className={active ? navBtnActive : navBtnIdle}
-                        onClick={() => setStreamId(t.id)}
-                      >
-                        {t.name}
-                      </button>
-                    )
-                  })}
-                </nav>
-              </div>
-            </aside>
-
-            <div className="min-w-0">
-              {loading || searchLoading ? (
-                <div className="flex justify-center py-20">
-                  <Spin size="large" />
-                </div>
-              ) : error ? (
-                <Empty description={error} />
-              ) : courses.length === 0 ? (
-                <Empty description="Пока нет опубликованных курсов в WordPress" />
-              ) : filteredCourses.length === 0 ? (
-                <Empty description="Ничего не нашлось. Смените фильтры или запрос в поиске." />
-              ) : (
-                <Row gutter={[20, 20]}>
-                  {filteredCourses.map((c) => (
-                    <Col xs={24} sm={12} xl={8} key={c.id}>
-                      <CourseCard course={c} />
-                    </Col>
-                  ))}
-                </Row>
-              )}
-=======
         <div id="courses-catalog" className="scroll-mt-24">
           {loading ? (
             <div className="flex justify-center py-20">
               <Spin size="large" />
->>>>>>> origin/changes
             </div>
           ) : error ? (
             <Empty description={error} />
