@@ -1,4 +1,4 @@
-import { Col, Empty, Row, Select, Spin } from 'antd'
+import { Col, Empty, Input, Row, Select, Spin } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
 import { fetchCourses, fetchTaxonomyTerms, searchCourses  } from '@shared/api/wordpress'
 import { OlympAppLayout } from '@/app/layouts'
@@ -175,46 +175,84 @@ const filteredCourses = useMemo(
 
   const courseFilters = (
     <div className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5" aria-label="Фильтры каталога">
-      <Select
+     <Select
         size="large"
         allowClear
         placeholder="Поток"
         className={`w-full ${filterSelectClassName}`}
         popupClassName="!rounded-xl [&_.ant-select-item]:!min-h-[48px] [&_.ant-select-item]:!flex [&_.ant-select-item]:!items-center [&_.ant-select-item]:!px-5 [&_.ant-select-item]:!py-0 [&_.ant-select-item-option-content]:!text-[18px] [&_.ant-select-item-option-content]:!font-medium [&_.ant-select-item-option-content]:!text-[#0d062b]"
-        value={streamId === 'all' ? undefined : streamId}
+        // Если выбрано 'all', то placeholder покажется, только если allowClear сбросил значение в undefined.
+        // Чтобы 'Все потоки' отображалось как выбранный элемент, убираем тернарник:
+        value={streamId} 
         onChange={(v) => setStreamId(v ?? 'all')}
-        options={streamTerms.map((t) => ({ value: t.id, label: t.name }))}
+        options={[
+          { value: 'all', label: 'Все потоки' }, // <- Добавили дефолтный вариант
+          ...streamTerms.map((t) => ({ value: t.id, label: t.name }))
+        ]}
       />
+      
       <Select
         size="large"
         allowClear
         placeholder="Предмет"
         className={`w-full ${filterSelectClassName}`}
         popupClassName="!rounded-xl [&_.ant-select-item]:!min-h-[48px] [&_.ant-select-item]:!flex [&_.ant-select-item]:!items-center [&_.ant-select-item]:!px-5 [&_.ant-select-item]:!py-0 [&_.ant-select-item-option-content]:!text-[18px] [&_.ant-select-item-option-content]:!font-medium [&_.ant-select-item-option-content]:!text-[#0d062b]"
-        value={subjectId === 'all' ? undefined : subjectId}
+        value={subjectId}
         onChange={(v) => setSubjectId(v ?? 'all')}
-        options={subjectTerms.map((t) => ({ value: t.id, label: t.name }))}
+        options={[
+          { value: 'all', label: 'Все предметы' }, // <- Добавили дефолтный вариант
+          ...subjectTerms.map((t) => ({ value: t.id, label: t.name }))
+        ]}
       />
+      
       <Select
         size="large"
         allowClear
-        placeholder="Семестр"
+        placeholder="Направление"
         className={`w-full ${filterSelectClassName}`}
         popupClassName="!rounded-xl [&_.ant-select-item]:!min-h-[48px] [&_.ant-select-item]:!flex [&_.ant-select-item]:!items-center [&_.ant-select-item]:!px-5 [&_.ant-select-item]:!py-0 [&_.ant-select-item-option-content]:!text-[18px] [&_.ant-select-item-option-content]:!font-medium [&_.ant-select-item-option-content]:!text-[#0d062b]"
-        value={categoryId === 'all' ? undefined : categoryId}
+        value={categoryId}
         onChange={(v) => setCategoryId(v ?? 'all')}
-        options={categoryTerms.map((t) => ({ value: t.id, label: t.name }))}
+        options={[
+          { value: 'all', label: 'Все направления' }, // <- Добавили дефолтный вариант
+          ...categoryTerms.map((t) => ({ value: t.id, label: t.name }))
+        ]}
       />
     </div>
+  )
+
+  const courseSearch = (
+    <div className="mb-6">
+       <Input
+          size="large"
+            allowClear
+            placeholder="Поиск по курсам..."
+            //prefix={searchLoading ? <Spin size="small" /> : <span className="anticon">🔍</span>}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className={[
+              '[&_.ant-input]:!text-[18px]',
+              '[&_.ant-input]:!font-medium',
+              '[&_.ant-input]:!text-[#0d062b]',
+              '[&_.ant-input-affix-wrapper]:!h-[50px]',
+              '[&_.ant-input-affix-wrapper]:!rounded-lg',
+              '[&_.ant-input-affix-wrapper]:!border-0',
+              '[&_.ant-input-affix-wrapper]:!bg-[#e4e4e4]',
+              '[&_.ant-input-affix-wrapper]:!px-5',
+              '[&_.ant-input-affix-wrapper]:!shadow-none',
+            ].join(' ')}
+        />
+      </div>
   )
 
   return (
    <OlympAppLayout activeNav="labs">
       <div className="catalog-page prisma prisma_theme_light">
+        {courseSearch}
         {courseFilters}
 
         <div id="courses-catalog" className="scroll-mt-24">
-          {loading ? (
+          {loading || searchLoading ? (
             <div className="flex justify-center py-20">
               <Spin size="large" />
             </div>
