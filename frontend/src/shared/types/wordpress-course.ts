@@ -219,8 +219,7 @@ function resolveStreamLabels(post: WpCoursePost, maps: CourseTermMaps | undefine
 }
 
 export function toCourseViewModel(post: WpCoursePost, maps?: CourseTermMaps): CourseViewModel {
-  const rawTitle =
-    typeof post.title?.rendered === 'string' ? post.title.rendered.replace(/<[^>]+>/g, '') : String(post.id)
+  const rawTitle = typeof post.title?.rendered === 'string' ? post.title.rendered.replace(/<[^>]+>/g, '') : String(post.id)
   const acfName = post.acf?.course_name?.trim()
   const title = acfName || rawTitle
   const excerptHtml = post.excerpt?.rendered ?? ''

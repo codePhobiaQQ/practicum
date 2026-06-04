@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-// --- 1. Говорим ElasticPress индексировать ACF-поля курсов ---
+// --- 1.1. Говорим ElasticPress индексировать ACF-поля курсов ---
 
 add_filter( 'ep_prepare_meta_allowed_protected_keys', function( $allowed_keys ) {
     $acf_fields = [
@@ -19,6 +19,105 @@ add_filter( 'ep_prepare_meta_allowed_protected_keys', function( $allowed_keys ) 
     ];
     return array_merge( $allowed_keys, $acf_fields );
 });
+
+// --- 1.2. Добавляем ACF-поля в поиск ---
+
+add_filter( 'ep_search_fields', function( $search_fields, $args ) {
+    $is_course_query = isset( $args['post_type'] ) && (
+        $args['post_type'] === 'course' ||
+        ( is_array( $args['post_type'] ) && in_array( 'course', $args['post_type'] ) )
+    );
+
+    if ( ! $is_course_query ) {
+        return $search_fields;
+    }
+
+    $acf_fields = [
+        'course_name',
+        'description',
+        'teaser',
+        'duration',
+        'subtitle',
+    ];
+
+    foreach ( $acf_fields as $field ) {
+        $search_fields[] = "meta.{$field}.value";
+    }
+
+    return $search_fields;
+}, 10, 2 );
+
+
+
+add_filter( 'ep_formatted_args', function( $formatted_args, $args ) {
+    if ( empty( $args['s'] ) ) {
+        return $formatted_args;
+    }
+
+    $search = $args['s'];
+
+    // Поля с весами — единый источник правды
+    $fields = [
+        'post_title^3',
+        'post_excerpt^1',
+        'meta.course_name.value^3',
+        'meta.teaser.value^2',
+        'meta.description.value^1',
+        'meta.duration.value^1',
+        'meta.subtitle.value^1',
+    ];
+
+    // Wildcard по тем же полям через .sortable (lowercase keyword)
+    $wildcard_fields = [
+        'post_title.sortable',
+        'meta.course_name.value.sortable',
+        'meta.teaser.value.sortable',
+        'meta.description.value.sortable',
+        'meta.duration.value.sortable',
+    ];
+
+    $wildcard_clauses = array_map( fn( $field ) => [
+        'wildcard' => [
+            $field => [
+                'value' => '*' . mb_strtolower( $search ) . '*',
+                'boost' => 1,
+            ],
+        ],
+    ], $wildcard_fields );
+
+    $formatted_args['query'] = [
+        'bool' => [
+            'should' => array_merge(
+                [
+                    // 1. Точное совпадение по словам — высокий приоритет
+                    [
+                        'multi_match' => [
+                            'query'                => $search,
+                            'fields'               => $fields,
+                            'type'                 => 'best_fields',
+                            'boost'                => 3,
+                            'minimum_should_match' => '1',
+                        ],
+                    ],
+                    // 2. Префиксный поиск — "full" найдёт "fullstack"
+                    [
+                        'multi_match' => [
+                            'query'  => $search,
+                            'fields' => $fields,
+                            'type'   => 'phrase_prefix',
+                            'boost'  => 2,
+                        ],
+                    ],
+                ],
+                // 3. Wildcard — "IT" найдёт "IT-специалист"
+                $wildcard_clauses
+            ),
+            'minimum_should_match' => 1,
+        ],
+    ];
+
+    return $formatted_args;
+}, 10, 2 );
 
 // --- 2. Включаем поддержку CPT "course" в ElasticPress ---
 
@@ -33,7 +132,7 @@ add_action( 'rest_api_init', function() {
     register_rest_route( 'practicum/v1', '/search', [
         'methods'             => 'GET',
         'callback'            => 'practicum_search_courses',
-        'permission_callback' => '__return_true', // публичный эндпоинт
+        'permission_callback' => '__return_true',
         'args'                => [
             'q' => [
                 'type'              => 'string',
@@ -66,8 +165,6 @@ function practicum_search_courses( WP_REST_Request $request ) {
         'paged'          => $page,
     ];
 
-    // Если есть поисковый запрос — добавляем 's',
-    // ElasticPress перехватит WP_Query и пойдёт в ES вместо MySQL
     if ( $q !== '' ) {
         $args['s'] = $q;
     }
@@ -75,16 +172,14 @@ function practicum_search_courses( WP_REST_Request $request ) {
     $query = new WP_Query( $args );
     $posts = $query->posts;
 
-    // Подключаем ACF для получения кастомных полей
     $results = array_map( function( $post ) {
         $acf = function_exists( 'get_fields' ) ? get_fields( $post->ID ) : [];
         return [
-            'id'      => $post->ID,
-            'slug'    => $post->post_name,
-            'title'   => [ 'rendered' => $post->post_title ],
-            'excerpt' => [ 'rendered' => $post->post_excerpt ],
-            'acf'     => $acf ?: new stdClass(),
-            // таксономии
+            'id'              => $post->ID,
+            'slug'            => $post->post_name,
+            'title'           => [ 'rendered' => $post->post_title ],
+            'excerpt'         => [ 'rendered' => $post->post_excerpt ],
+            'acf'             => $acf ?: new stdClass(),
             'cource-category' => wp_get_post_terms( $post->ID, 'cource-category', ['fields' => 'ids'] ),
             'cource-subject'  => wp_get_post_terms( $post->ID, 'cource-subject',  ['fields' => 'ids'] ),
             'cource-tread'    => wp_get_post_terms( $post->ID, 'cource-tread',    ['fields' => 'ids'] ),

@@ -139,8 +139,7 @@ export function CourseDetailPage() {
     !materialsHtml &&
     programModules.length === 0
 
-  const showProgramPlaceholder =
-    !materialsHtml && collapseItems.length === 0 && !showEditorFallback
+  const showProgramPlaceholder = !materialsHtml && collapseItems.length === 0 && !showEditorFallback
 
   return (
     <OlympAppLayout activeNav="labs">
