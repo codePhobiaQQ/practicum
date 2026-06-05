@@ -31,3 +31,17 @@ add_filter( 'rest_lesson_collection_params', function( $params ) {
     }
     return $params;
 }, 10, 1 );
+
+// Разрешаем фильтрацию уроков по мета-полям через REST API
+add_filter( 'rest_lesson_query', function( $args, $request ) {
+    // Проверяем, пришли ли параметры meta_key и meta_value в URL-запросе
+    $meta_key   = $request->get_param( 'meta_key' );
+    $meta_value = $request->get_param( 'meta_value' );
+
+    if ( ! empty( $meta_key ) && ! empty( $meta_value ) ) {
+        $args['meta_key']   = sanitize_text_field( $meta_key );
+        $args['meta_value'] = sanitize_text_field( $meta_value );
+    }
+
+    return $args;
+}, 10, 2 );
