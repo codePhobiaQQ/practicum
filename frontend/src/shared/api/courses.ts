@@ -99,7 +99,7 @@ export async function fetchTaxonomyTerms(taxonomy: string, perPage = 100): Promi
 }
 
 // Отдельный клиент для кастомных эндпоинтов practicum
-const practicumClient = axios.create({
+const elasticSearchClient = axios.create({
   baseURL: (() => {
     const base = getBaseUrl()
     return base ? `${base}/wp-json/practicum/v1` : '/wp-json/practicum/v1'
@@ -107,7 +107,7 @@ const practicumClient = axios.create({
   timeout: 20000,
 })
 
-export interface SearchCoursesResult {
+export interface ElasticSearchResults {
   total: number
   pages: number
   page: number
@@ -115,12 +115,12 @@ export interface SearchCoursesResult {
   courses: WpCoursePost[]
 }
 
-export async function searchCourses(
+export async function elasticSearchCourses(
   q: string,
   perPage = 50,
   page = 1,
-): Promise<SearchCoursesResult> {
-  const { data } = await practicumClient.get<SearchCoursesResult>('/search', {
+): Promise<ElasticSearchResults> {
+  const { data } = await elasticSearchClient.get<ElasticSearchResults>('/search', {
     params: { q, per_page: perPage, page },
   })
   return data

@@ -1,12 +1,13 @@
 import { Col, Empty, Input, Row, Select, Spin } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
-import { fetchCourses, fetchTaxonomyTerms, searchCourses  } from '@shared/api/wordpress'
+import { fetchCourses, fetchTaxonomyTerms, elasticSearchCourses  } from '@/shared/api/courses'
 import { OlympAppLayout } from '@/app/layouts'
 import {
   toCourseViewModel,
   type CourseTermMaps,
   type CourseViewModel,
   type WpTaxonomyTerm,
+  type WpCoursePost,
 } from '@shared/types/wordpress-course'
 import { CourseCard } from './course-card'
 
@@ -81,7 +82,7 @@ function courseMatchesFilters(
 
 export function CourcesListPage() {
   const [loading, setLoading] = useState(true)
-  const [courses, setCourses] = useState<CourseViewModel[]>([])
+  const [rawCourses, setRawCourses] = useState<WpCoursePost[]>([])
   const [categoryTerms, setCategoryTerms] = useState<WpTaxonomyTerm[]>([])
   const [subjectTerms, setSubjectTerms] = useState<WpTaxonomyTerm[]>([])
   const [streamTerms, setStreamTerms] = useState<WpTaxonomyTerm[]>([])
@@ -103,14 +104,11 @@ export function CourcesListPage() {
       fetchTaxonomyTerms(TAX_STREAM).catch(() => [] as WpTaxonomyTerm[]),
     ])
       .then(([posts, cats, subs, streams]) => {
-        if (cancelled) {
-          return
-        }
-        const maps = toTermMaps(cats, subs, streams)
+        if (cancelled) return
         setCategoryTerms(sortTermsRu(cats))
         setSubjectTerms(sortTermsRu(subs))
         setStreamTerms(sortTermsRu(streams))
-        setCourses(posts.map((p) => toCourseViewModel(p, maps)))
+        setRawCourses(posts)
         setError(null)
       })
       .catch(() => {
@@ -119,58 +117,59 @@ export function CourcesListPage() {
         }
       })
       .finally(() => {
-        if (!cancelled) {
-          setLoading(false)
-        }
+        if (!cancelled) setLoading(false)
       })
-    return () => {
-      cancelled = true
-    }
+    return () => { cancelled = false }
   }, [])
 
-// Debounce: ждём 400мс после последнего нажатия клавиши
-useEffect(() => {
-  const timer = setTimeout(() => setDebouncedSearch(search), 400)
-  return () => clearTimeout(timer)
-}, [search])
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(search), 400)
+    return () => clearTimeout(timer)
+  }, [search])
 
-// Поиск через ElasticSearch при изменении запроса
-useEffect(() => {
-  if (debouncedSearch.trim() === '') {
-    // запрос очищен — восстанавливаем полный список
+  useEffect(() => {
+    if (loading) return 
+
+    if (debouncedSearch.trim() === '') {
+      let cancelled = false
+      setSearchLoading(true)
+      fetchCourses()
+        .then((posts) => {
+          if (!cancelled) setRawCourses(posts)
+        })
+        .finally(() => {
+          if (!cancelled) setSearchLoading(false)
+        })
+      return () => { cancelled = true }
+    }
+
     let cancelled = false
     setSearchLoading(true)
-    fetchCourses().then((posts) => {
-      if (cancelled) return
-      const maps = toTermMaps(categoryTerms, subjectTerms, streamTerms)
-      setCourses(posts.map((p) => toCourseViewModel(p, maps)))
-    })
-    .finally(() => {
-      if (!cancelled) setSearchLoading(false)
-    })
+    elasticSearchCourses(debouncedSearch)
+      .then(({ courses: found }) => {
+        if (!cancelled) setRawCourses(found)
+      })
+      .catch(() => {
+        if (!cancelled) setError('Ошибка поиска. Попробуйте ещё раз.')
+      })
+      .finally(() => {
+        if (!cancelled) setSearchLoading(false)
+      })
     return () => { cancelled = true }
-  }
-  let cancelled = false
-  setSearchLoading(true)
-  searchCourses(debouncedSearch)
-    .then(({ courses: found }) => {
-      if (cancelled) return
-      const maps = toTermMaps(categoryTerms, subjectTerms, streamTerms)
-      setCourses(found.map((p) => toCourseViewModel(p, maps)))
-    })
-    .catch(() => {
-      if (!cancelled) setError('Ошибка поиска. Попробуйте ещё раз.')
-    })
-    .finally(() => {
-      if (!cancelled) setSearchLoading(false)
-    })
-  return () => { cancelled = true }
-}, [debouncedSearch])
+  }, [debouncedSearch, loading])
 
-const filteredCourses = useMemo(
-  () => courses.filter((c) => courseMatchesFilters(c, categoryId, subjectId, streamId)),
-  [courses, categoryId, subjectId, streamId],
-)
+  const termMaps = useMemo(() => {
+    return toTermMaps(categoryTerms, subjectTerms, streamTerms)
+  }, [categoryTerms, subjectTerms, streamTerms])
+
+  const viewModels = useMemo(() => {
+    return rawCourses.map((post) => toCourseViewModel(post, termMaps))
+  }, [rawCourses, termMaps])
+
+  const filteredCourses = useMemo(
+    () => viewModels.filter((c) => courseMatchesFilters(c, categoryId, subjectId, streamId)),
+    [viewModels, categoryId, subjectId, streamId],
+  )
 
 
   const courseFilters = (
@@ -258,7 +257,7 @@ const filteredCourses = useMemo(
             </div>
           ) : error ? (
             <Empty description={error} />
-          ) : courses.length === 0 ? (
+          ) : viewModels.length === 0 ? (
             <Empty description="Пока нет опубликованных курсов в WordPress" />
           ) : filteredCourses.length === 0 ? (
             <Empty description="Ничего не нашлось. Смените фильтры." />

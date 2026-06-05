@@ -1,29 +1,26 @@
-import { Breadcrumb, Collapse, Spin, Typography } from 'antd'
+import { Breadcrumb, Spin, Typography } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { fetchCourseBySlug, fetchTaxonomyTerms } from '@shared/api/wordpress'
+import { marked } from 'marked';
+import { fetchCourseBySlug, fetchTaxonomyTerms } from '@/shared/api/courses'
+import { fetchLessonsByCourseId } from '@/shared/api/lessons'
 import {
-  getAttachmentsHtml,
   getFeaturedImageUrl,
-  getLessonBlocks,
-  getMaterialsHtml,
-  getProgramModules,
   toCourseViewModel,
   type CourseTermMaps,
   type WpCoursePost,
   type WpTaxonomyTerm,
 } from '@shared/types/wordpress-course'
+import {
+  LessonViewModel,
+} from '@shared/types/wordpress-lesson'
 import { OlympAppLayout } from '@/app/layouts'
-import { MaterialBlock } from './material-block'
 
 const TAX_CATEGORY = 'cource-category'
 const TAX_SUBJECT = 'cource-subject'
 const TAX_STREAM = 'cource-tread'
 
 const { Title, Paragraph } = Typography
-
-const proseCourse =
-  'max-w-none text-[15px] leading-relaxed text-[#0d062b] [&_a]:text-[#140f55] [&_h2]:mb-3 [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-bold [&_h3]:mb-2 [&_h3]:mt-4 [&_h3]:text-lg [&_h3]:font-semibold [&_li]:mb-1 [&_ol]:mb-3 [&_p]:mb-3 [&_ul]:mb-3'
 
 function toTermMaps(
   cats: WpTaxonomyTerm[],
@@ -41,6 +38,7 @@ export function CourseDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const [loading, setLoading] = useState(true)
   const [post, setPost] = useState<WpCoursePost | null>(null)
+  const [lessons, setLessons] = useState<LessonViewModel[]>([])
   const [termMaps, setTermMaps] = useState<CourseTermMaps | undefined>(undefined)
   const [error, setError] = useState<string | null>(null)
 
@@ -50,23 +48,36 @@ export function CourseDetailPage() {
     }
     let cancelled = false
     setLoading(true)
-    Promise.all([
-      fetchCourseBySlug(slug),
-      fetchTaxonomyTerms(TAX_CATEGORY).catch(() => [] as WpTaxonomyTerm[]),
-      fetchTaxonomyTerms(TAX_SUBJECT).catch(() => [] as WpTaxonomyTerm[]),
-      fetchTaxonomyTerms(TAX_STREAM).catch(() => [] as WpTaxonomyTerm[]),
-    ])
-      .then(([p, cats, subs, streams]) => {
-        if (cancelled) {
+
+    // Сначала получаем данные курса, так как нам нужен его ID для запроса уроков
+    fetchCourseBySlug(slug)
+      .then((p) => {
+        if (cancelled) return
+        if (!p) {
+          setPost(null)
+          setError('Курс не найден')
+          setLoading(false)
           return
         }
+
         setPost(p)
-        setTermMaps(toTermMaps(cats, subs, streams))
-        setError(p ? null : 'Курс не найден')
+
+        // Загружаем таксономии и уроки параллельно, зная точный ID курса
+        return Promise.all([
+          fetchTaxonomyTerms(TAX_CATEGORY).catch(() => [] as WpTaxonomyTerm[]),
+          fetchTaxonomyTerms(TAX_SUBJECT).catch(() => [] as WpTaxonomyTerm[]),
+          fetchTaxonomyTerms(TAX_STREAM).catch(() => [] as WpTaxonomyTerm[]),
+          fetchLessonsByCourseId(p.id).catch(() => [] as LessonViewModel[]),
+        ]).then(([cats, subs, streams, loadedLessons]) => {
+          if (cancelled) return
+          setTermMaps(toTermMaps(cats, subs, streams))
+          setLessons(loadedLessons)
+          setError(null)
+        })
       })
       .catch(() => {
         if (!cancelled) {
-          setError('Ошибка загрузки курса')
+          setError('Ошибка загрузки данных курса')
           setPost(null)
         }
       })
@@ -75,6 +86,7 @@ export function CourseDetailPage() {
           setLoading(false)
         }
       })
+
     return () => {
       cancelled = true
     }
@@ -83,63 +95,28 @@ export function CourseDetailPage() {
   const vm = useMemo(() => (post ? toCourseViewModel(post, termMaps) : null), [post, termMaps])
   const cover = post ? getFeaturedImageUrl(post) : undefined
 
-  const materialsHtml = post?.acf ? getMaterialsHtml(post.acf) : undefined
-  const attachmentsHtml = post?.acf ? getAttachmentsHtml(post.acf) : undefined
-  const programModules = post?.acf ? getProgramModules(post.acf) : []
-
-  const collapseItems = useMemo(() => {
-    if (!vm?.modules.length) {
-      return []
+  const lessonVms = lessons
+  const firstLessonUrl = useMemo(() => {
+    if (vm && lessonVms.length > 0) {
+      return `/courses/${vm.slug}/lessons/${lessonVms[0].slug}`
     }
-    return vm.modules.map((mod, mi) => ({
-      key: String(mi),
-      label: (
-        <span className="text-[15px] font-semibold text-light-text md:text-base">
-          Модуль {mi + 1}. {mod.module_title}
-        </span>
-      ),
-      children: (
-        <div className="space-y-8">
-          {(mod.lessons ?? []).map((lesson, li) => (
-            <div
-              key={`${mi}-${li}`}
-              id={lesson.lesson_slug ? `lesson-${lesson.lesson_slug}` : `lesson-${mi}-${li}`}
-              className="rounded-xl border border-black/[0.08] bg-[#f7f7f7] p-5 md:p-6"
-            >
-              <Title level={4} className="!mb-4 !text-lg !font-bold md:!text-xl">
-                {lesson.lesson_title}
-              </Title>
-              <div className="space-y-6">
-                {getLessonBlocks(lesson).map((mat, bi) => (
-                  <MaterialBlock key={`${mi}-${li}-${bi}`} block={mat} index={bi} />
-                ))}
-              </div>
-              {getLessonBlocks(lesson).length === 0 && (
-                <Paragraph type="secondary" className="!mb-0">
-                  Материалы появятся позже
-                </Paragraph>
-              )}
-            </div>
-          ))}
-        </div>
-      ),
-    }))
-  }, [vm])
+    return null
+  }, [vm, lessonVms])
 
-  const legacyGallery =
-    post?.acf &&
-      Array.isArray(post.acf.attachments) &&
-      post.acf.attachments.length > 0
-      ? post.acf.attachments
-      : null
+  // Функция для извлечения чистого текста из HTML-строки
+  const parseMarkdownWithHtml = (htmlString: string) => {
+    if (typeof window === 'undefined') return htmlString; // Защита для SSR (Next.js)
+    
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+    
+    // doc.body.innerText вернет чистый текст, сохранив переносы строк
+    // и убрав все теги <div>, мешающие маркдауну
+    const cleanText = doc.body.innerText; 
+    
+    return marked.parse(cleanText);
+  };
 
-  const showEditorFallback =
-    Boolean(post?.content?.rendered?.trim()) &&
-    !post?.acf?.description?.trim() &&
-    !materialsHtml &&
-    programModules.length === 0
-
-  const showProgramPlaceholder = !materialsHtml && collapseItems.length === 0 && !showEditorFallback
 
   return (
     <OlympAppLayout activeNav="labs">
@@ -177,11 +154,14 @@ export function CourseDetailPage() {
                 ]}
               />
               <div className="mb-4 flex flex-wrap gap-2">
-                {vm.categoryLabel ? (
-                  <span className="inline-flex rounded-full bg-[#eeecff] px-3 py-1 text-[12px] font-semibold uppercase tracking-wide text-[#140f55]">
-                    {vm.categoryLabel}
+                {vm.categoryLabels.map((s) => (
+                  <span
+                    key={s}
+                    className="inline-flex rounded-full bg-[#eeecff] px-3 py-1 text-[12px] font-semibold uppercase tracking-wide text-[#140f55]"
+                  >
+                    {s}
                   </span>
-                ) : null}
+                ))}
                 {vm.subjectLabels.map((s) => (
                   <span
                     key={s}
@@ -199,17 +179,34 @@ export function CourseDetailPage() {
                   </span>
                 ))}
               </div>
-              <Title level={1} className="!mb-4 !text-[1.75rem] !font-bold !leading-[1.15] !text-[#0d062b] md:!text-4xl lg:!text-[2.5rem]">
-                {vm.title}
-              </Title>
-              {vm.subtitle ? (
-                <Paragraph className="!mb-3 !text-lg !leading-relaxed !text-[#0d062b]/70 md:!text-xl">
-                  {vm.subtitle}
-                </Paragraph>
-              ) : null}
-              {vm.duration ? (
-                <Paragraph className="!mb-0 !text-base !text-[#0d062b]/70">Срок: {vm.duration}</Paragraph>
-              ) : null}
+              
+              <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+                <div>
+                  <Title level={1} className="!mb-4 !text-[1.75rem] !font-bold !leading-[1.15] !text-[#0d062b] md:!text-4xl lg:!text-[2.5rem]">
+                    {vm.title}
+                  </Title>
+                  {vm.subtitle ? (
+                    <Paragraph className="!mb-3 !text-lg !leading-relaxed !text-[#0d062b]/70 md:!text-xl">
+                      {vm.subtitle}
+                    </Paragraph>
+                  ) : null}
+                  {vm.duration ? (
+                    <Paragraph className="!mb-0 !text-base !text-[#0d062b]/70">Срок: {vm.duration}</Paragraph>
+                  ) : null}
+                </div>
+
+                {/* Динамическая кнопка «Начать курс» */}
+                {firstLessonUrl && (
+                  <div className="shrink-0">
+                    <Link
+                      to={firstLessonUrl}
+                      className="inline-flex items-center justify-center rounded-xl bg-[#140f55] px-6 py-3.5 text-[15px] font-bold text-white transition-all hover:bg-[#140f55]/90 hover:shadow-lg active:scale-[0.98]"
+                    >
+                      Начать курс →
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
           </section>
 
@@ -220,91 +217,56 @@ export function CourseDetailPage() {
               </div>
             ) : null}
 
-            {post?.acf?.description ? (
-              <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-6 md:p-10">
-                <h2 className="mb-4 text-xl font-bold text-[#0d062b] md:text-2xl">О курсе</h2>
-                <div
-                  className="max-w-none text-[15px] leading-relaxed text-[#0d062b] [&_a]:text-[#140f55] [&_p]:mb-3 [&_ul]:mb-3"
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: post.acf.description }}
-                />
-              </div>
-            ) : null}
+          {post?.acf?.description ? (
+            <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-6 md:p-10">
+              <h2 className="mb-4 text-xl font-bold text-[#0d062b] md:text-2xl">О курсе</h2>
+              <div
+                className="max-w-none text-[15px] leading-relaxed text-[#0d062b] 
+                          [&_a]:text-[#140f55] 
+                          [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mb-3 [&_h2]:mt-5
+                          [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mb-2 [&_h3]:mt-4
+                          [&_p]:mb-3 [&_ul]:mb-3 [&_li]:list-disc [&_li]:ml-5"
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: parseMarkdownWithHtml(post.acf.description) }} 
+              />
+            </div>
+          ) : null}
 
-            {materialsHtml ? (
-              <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-6 md:p-10">
-                <h2 className="mb-4 text-xl font-bold text-[#0d062b] md:text-2xl">Материал</h2>
-                <div
-                  className={proseCourse}
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: materialsHtml }}
-                />
-              </div>
-            ) : null}
-
-            {collapseItems.length > 0 ? (
-              <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-5 md:p-8">
-                <h2 className="mb-6 text-xl font-bold tracking-tight text-[#0d062b] md:text-2xl">
-                  Программа и материалы
-                </h2>
-                <Collapse
-                  bordered={false}
-                  defaultActiveKey={collapseItems[0]?.key ? [String(collapseItems[0].key)] : undefined}
-                  className="bg-transparent [&_.ant-collapse-header]:!items-center [&_.ant-collapse-header]:!py-4 [&_.ant-collapse-item]:!mb-2 [&_.ant-collapse-item]:overflow-hidden [&_.ant-collapse-item]:rounded-xl [&_.ant-collapse-item]:border [&_.ant-collapse-item]:border-black/[0.08] [&_.ant-collapse-content-box]:!bg-[#f7f7f7] [&_.ant-collapse-content-box]:!pt-2"
-                  items={collapseItems}
-                />
-              </div>
-            ) : null}
-
-            {showProgramPlaceholder ? (
-              <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-6 md:p-8">
-                <h2 className="mb-4 text-xl font-bold text-[#0d062b] md:text-2xl">Программа курса</h2>
-                <Paragraph type="secondary" className="!mb-0">
-                  Программа будет опубликована позже.
-                </Paragraph>
-              </div>
-            ) : null}
-
-            {attachmentsHtml ? (
-              <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-6 md:p-10">
-                <h2 className="mb-4 text-xl font-bold text-[#0d062b] md:text-2xl">Полезные материалы</h2>
-                <div
-                  className={proseCourse}
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: attachmentsHtml }}
-                />
-              </div>
-            ) : null}
-
-            {legacyGallery ? (
-              <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-6 md:p-8">
-                <h2 className="mb-4 text-lg font-bold text-[#0d062b]">Материалы и файлы</h2>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-                  {legacyGallery.map((img, i) => (
-                    <a
-                      key={img.id ?? i}
-                      href={img.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="overflow-hidden rounded-xl border border-black/[0.08] bg-[#f7f7f7] transition-shadow hover:shadow-md"
+            {/* НОВЫЙ БЛОК: Уроки курса */}
+            <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-6 md:p-10">
+              <h2 className="mb-6 text-xl font-bold text-[#0d062b] md:text-2xl">Программа обучения</h2>
+              
+              {lessonVms.length === 0 ? (
+                <p className="text-[15px] text-[#0d062b]/60">В данном курсе еще нет опубликованных уроков.</p>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {lessonVms.map((lesson) => (
+                    <Link
+                      key={lesson.id}
+                      to={`/courses/${vm.slug}/lessons/${lesson.slug}`}
+                      className="group flex items-start gap-4 rounded-xl border border-black/[0.04] bg-neutral-50/50 p-4 transition-all hover:border-black/[0.08] hover:bg-white hover:shadow-sm"
                     >
-                      <img src={img.url} alt="" className="h-32 w-full object-cover" loading="lazy" />
-                    </a>
+                      {/* Номер урока */}
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#eeecff] text-[14px] font-bold text-[#140f55] group-hover:bg-[#140f55] group-hover:text-white transition-colors">
+                        {lesson.order}
+                      </div>
+                      
+                      {/* Заголовок и Тизер */}
+                      <div className="flex-1 pt-0.5">
+                        <h4 className="text-[16px] font-semibold text-[#0d062b] group-hover:text-[#140f55] transition-colors">
+                          {lesson.title}
+                        </h4>
+                        {lesson.teaser ? (
+                          <p className="mt-1 text-[14px] leading-relaxed text-[#0d062b]/60">
+                            {lesson.teaser}
+                          </p>
+                        ) : null}
+                      </div>
+                    </Link>
                   ))}
                 </div>
-              </div>
-            ) : null}
-
-            {showEditorFallback && post?.content?.rendered ? (
-              <div className="mb-6 rounded-2xl border border-black/[0.08] bg-white p-6 md:p-10">
-                <h2 className="mb-4 text-xl font-bold text-[#0d062b] md:text-2xl">О курсе</h2>
-                <div
-                  className="max-w-none text-[15px] leading-relaxed text-[#0d062b]/70 [&_p]:mb-3"
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: post.content.rendered }}
-                />
-              </div>
-            ) : null}
+              )}
+            </div>
 
             <div className="mt-8 text-center md:text-left">
               <Link

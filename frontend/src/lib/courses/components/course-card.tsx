@@ -32,11 +32,14 @@ export function CourseCard({ course }: { course: CourseViewModel }) {
         </div>
         <div className="flex flex-1 flex-col px-5 pb-5 pt-4">
           <div className="mb-2 flex flex-wrap items-center gap-1.5">
-            {course.categoryLabel ? (
-              <span className="inline-flex w-fit rounded-full bg-practicum-mist px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent1">
-                {course.categoryLabel}
+            {course.categoryLabels.map((s) => (
+              <span
+                key={s}
+                className="inline-flex rounded-full bg-[#eeecff] px-3 py-1 text-[12px] font-semibold uppercase tracking-wide text-[#140f55]"
+              >
+                {s}
               </span>
-            ) : null}
+            ))}
             {course.subjectLabels.map((s) => (
               <span
                 key={s}
