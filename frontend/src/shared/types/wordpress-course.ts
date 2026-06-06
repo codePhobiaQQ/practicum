@@ -9,7 +9,7 @@ export interface CourseAcf {
   subtitle?: string
   hero_image?: string | number | false
 
-  book_id?: number
+  course_book?: number
   book_order?: number
 }
 
@@ -152,7 +152,7 @@ export function toCourseViewModel(post: WpCoursePost, maps?: CourseTermMaps): Co
     streamLabels: resolveStreamLabels(post, maps),
     coverUrl: getFeaturedImageUrl(post),
 
-    bookId: post.acf?.book_id ?? undefined,
+    bookId: post.acf?.course_book ?? undefined,
     bookOrder: post.acf?.book_order ?? undefined,
   }
 }

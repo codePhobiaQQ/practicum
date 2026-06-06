@@ -104,7 +104,7 @@ export async function fetchCoursesByBookId(bookId: number): Promise<WpCoursePost
   }
   const { data } = await client.get<WpCoursePost[]>('/course', {
     params: {
-      meta_key: 'book_id',
+      meta_key: 'course_book',
       meta_value: bookId,
       per_page: 100,
       orderby: 'meta_value_num',  // сортировка по book_order на стороне WP как fallback
