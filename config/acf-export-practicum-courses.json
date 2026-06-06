@@ -68,6 +68,36 @@
         "rows": 4,
         "placeholder": "",
         "new_lines": "br"
+      },
+      {
+        "key": "field_pc_book",
+        "label": "Пособие",
+        "name": "course_book",
+        "instructions": "Пособие, в которое входит этот курс. Оставьте пустым если курс не входит ни в одно пособие.",
+        "required": 0,
+        "type": "post_object",
+        "post_type": ["book"],
+        "taxonomy": "",
+        "allow_null": 1,
+        "multiple": 0,
+        "return_format": "id",
+        "ui": 1,
+        "save_custom": 0
+      },
+      {
+        "key": "field_pc_book_order",
+        "label": "Порядок в пособии",
+        "name": "book_order",
+        "instructions": "Порядковый номер курса внутри пособия (1, 2, 3 …). Заполняется только если выбрано пособие.",
+        "required": 0,
+        "type": "number",
+        "default_value": "",
+        "min": 1,
+        "max": "",
+        "step": 1,
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
       }
     ],
     "location": [
@@ -80,7 +110,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Мета-поля CPT course. Уроки — отдельный CPT lesson, привязанный через post_parent.",
+    "description": "Мета-поля CPT course. Уроки — отдельный CPT lesson, привязанный через lesson_course. Пособия — через book_id / book_order.",
     "show_in_rest": 1
   },
 

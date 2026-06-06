@@ -98,6 +98,24 @@ export async function fetchTaxonomyTerms(taxonomy: string, perPage = 100): Promi
   return data
 }
 
+export async function fetchCoursesByBookId(bookId: number): Promise<WpCoursePost[]> {
+  if (!bookId) {
+    return []
+  }
+  const { data } = await client.get<WpCoursePost[]>('/course', {
+    params: {
+      meta_key: 'book_id',
+      meta_value: bookId,
+      per_page: 100,
+      orderby: 'meta_value_num',  // сортировка по book_order на стороне WP как fallback
+      meta_key_orderby: 'book_order',
+      order: 'asc',
+      _embed: true,
+    },
+  })
+  return data
+}
+
 // Отдельный клиент для кастомных эндпоинтов practicum
 const elasticSearchClient = axios.create({
   baseURL: (() => {

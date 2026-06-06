@@ -7,24 +7,41 @@
         "key": "field_pl_course",
         "label": "Курс",
         "name": "lesson_course",
+        "aria-label": "",
+        "type": "post_object",
         "instructions": "Курс, к которому относится урок",
         "required": 1,
-        "type": "post_object",
-        "post_type": ["course"],
+        "conditional_logic": false,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "post_type": [
+          "course"
+        ],
         "taxonomy": "",
         "allow_null": 0,
         "multiple": 0,
         "return_format": "id",
         "ui": 1,
-        "save_custom": 0
+        "save_custom": 0,
+        "bidirectional_target": []
       },
       {
         "key": "field_pl_order",
         "label": "Порядковый номер",
         "name": "lesson_order",
+        "aria-label": "",
+        "type": "number",
         "instructions": "Определяет порядок урока внутри курса (1, 2, 3 …)",
         "required": 1,
-        "type": "number",
+        "conditional_logic": false,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "min": 1,
         "max": "",
@@ -37,9 +54,16 @@
         "key": "field_pl_teaser",
         "label": "Краткое описание",
         "name": "lesson_teaser",
+        "aria-label": "",
+        "type": "textarea",
         "instructions": "Для карточки урока в оглавлении курса",
         "required": 0,
-        "type": "textarea",
+        "conditional_logic": false,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "default_value": "",
         "maxlength": "",
         "rows": 3,
@@ -50,32 +74,56 @@
         "key": "field_pl_md_file",
         "label": "MD-файл",
         "name": "lesson_md_file",
+        "aria-label": "",
+        "type": "file",
         "instructions": "Загрузите .md файл с контентом урока",
         "required": 0,
-        "type": "file",
+        "conditional_logic": false,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "return_format": "url",
         "library": "all",
         "min_size": "",
         "max_size": "",
-        "mime_types": "md,text/markdown,text/plain"
+        "mime_types": "md,text\/markdown,text\/plain"
       },
       {
         "key": "field_pl_preview",
         "label": "Превью",
         "name": "lesson_preview",
+        "aria-label": "",
+        "type": "image",
         "instructions": "Обложка урока (опционально)",
         "required": 0,
-        "type": "image",
+        "conditional_logic": false,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
         "return_format": "url",
         "preview_size": "medium",
         "library": "all",
-        "min_width": "", "min_height": "", "min_size": "",
-        "max_width": "", "max_height": "", "max_size": "",
+        "min_width": "",
+        "min_height": "",
+        "min_size": "",
+        "max_width": "",
+        "max_height": "",
+        "max_size": "",
         "mime_types": ""
       }
     ],
     "location": [
-      [{ "param": "post_type", "operator": "==", "value": "lesson" }]
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "lesson"
+        }
+      ]
     ],
     "menu_order": 0,
     "position": "normal",
@@ -85,9 +133,11 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Поля CPT lesson. Контент урока — MD-файл (lesson_md_file) или post_content. Привязка к курсу — lesson_course (ID).",
-    "show_in_rest": 1
+    "show_in_rest": 1,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": ""
   },
-
   {
     "key": "post_type_practicum_lesson",
     "title": "Уроки",
@@ -95,6 +145,10 @@
     "active": true,
     "post_type": "lesson",
     "advanced_configuration": false,
+    "import_source": "",
+    "import_date": "",
+    "allow_ai_access": false,
+    "ai_description": "",
     "labels": {
       "name": "Уроки",
       "singular_name": "урок",
@@ -133,11 +187,12 @@
     "publicly_queryable": true,
     "show_ui": true,
     "show_in_menu": true,
+    "admin_menu_parent": "",
     "show_in_admin_bar": true,
     "show_in_nav_menus": true,
     "show_in_rest": true,
     "rest_base": "lesson",
-    "rest_namespace": "wp/v2",
+    "rest_namespace": "wp\/v2",
     "rest_controller_class": "WP_REST_Posts_Controller",
     "menu_position": "",
     "menu_icon": {
@@ -147,7 +202,13 @@
     "rename_capabilities": false,
     "singular_capability_name": "post",
     "plural_capability_name": "posts",
-    "supports": ["title", "editor", "thumbnail", "excerpt", "custom-fields"],
+    "supports": [
+      "title",
+      "editor",
+      "thumbnail",
+      "excerpt",
+      "custom-fields"
+    ],
     "taxonomies": "",
     "has_archive": false,
     "has_archive_slug": "",
@@ -158,7 +219,10 @@
       "pages": "1"
     },
     "query_var": "post_type_key",
+    "query_var_name": "",
     "can_export": true,
-    "delete_with_user": false
+    "delete_with_user": false,
+    "register_meta_box_cb": "",
+    "enter_title_here": ""
   }
 ]

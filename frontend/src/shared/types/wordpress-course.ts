@@ -8,6 +8,9 @@ export interface CourseAcf {
   teaser?: string
   subtitle?: string
   hero_image?: string | number | false
+
+  book_id?: number
+  book_order?: number
 }
 
 export interface WpEmbeddedMedia {
@@ -119,6 +122,9 @@ export interface CourseViewModel {
   streamLabels: string[]
 
   coverUrl?: string
+
+  bookId?: number
+  bookOrder?: number
 }
 
 export function toCourseViewModel(post: WpCoursePost, maps?: CourseTermMaps): CourseViewModel {
@@ -145,5 +151,24 @@ export function toCourseViewModel(post: WpCoursePost, maps?: CourseTermMaps): Co
     subjectLabels: resolveSubjectLabels(post, maps),
     streamLabels: resolveStreamLabels(post, maps),
     coverUrl: getFeaturedImageUrl(post),
+
+    bookId: post.acf?.book_id ?? undefined,
+    bookOrder: post.acf?.book_order ?? undefined,
+  }
+}
+
+export function sortCoursesByBookOrder(courses: CourseViewModel[]): CourseViewModel[] {
+  return [...courses].sort((a, b) => (a.bookOrder ?? 0) - (b.bookOrder ?? 0))
+}
+ 
+export function getCourseNavigation(
+  courses: CourseViewModel[],
+  currentSlug: string,
+): { prev: CourseViewModel | null; next: CourseViewModel | null } {
+  const idx = courses.findIndex((c) => c.slug === currentSlug)
+  if (idx === -1) return { prev: null, next: null }
+  return {
+    prev: idx > 0 ? courses[idx - 1] : null,
+    next: idx < courses.length - 1 ? courses[idx + 1] : null,
   }
 }
