@@ -1,8 +1,11 @@
 import { Breadcrumb, Spin, Typography } from 'antd'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef  } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown, { Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm';
+import mermaid from 'mermaid';
+import React from 'react'
+
 import { fetchCourseBySlug } from '@shared/api/courses'
 import { fetchLessonsByCourseId, fetchLessonBySlug, fetchMdContent } from '@shared/api/lessons'
 import {
@@ -113,6 +116,89 @@ export function LessonPage() {
     course?.title?.rendered?.replace(/<[^>]+>/g, '').trim() ||
     'Курс'
 
+
+  mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+
+  interface MermaidBlockProps {
+    children: string;
+  }
+
+  function MermaidBlock({ children }: MermaidBlockProps) {
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      if (ref.current) {
+        mermaid.run({ nodes: [ref.current] });
+      }
+    }, [children]);
+
+    return (
+      <div
+        ref={ref}
+        className="mermaid"
+        style={{ textAlign: 'center', margin: '1.5rem 0' }}
+      >
+        {children}
+      </div>
+    );
+  }
+
+  const components: Components = {
+    code({ className, children }) {
+      const lang = (className || '').replace('language-', '');
+      if (lang === 'mermaid') {
+        return <MermaidBlock>{String(children).trim()}</MermaidBlock>;
+      }
+      return <code className={className}>{children}</code>;
+    },
+    blockquote({ children }) {
+      const childArray = React.Children.toArray(children);
+      
+      const firstParagraph = childArray.find((c) => React.isValidElement(c));
+
+      if (React.isValidElement(firstParagraph)) {
+        const paragraphChildren = React.Children.toArray(firstParagraph.props.children);
+        
+        const firstText = paragraphChildren
+          .map((c) => (typeof c === 'string' ? c : ''))
+          .join('');
+
+        const match = firstText.match(/^\[!([\w]+)\]\s*(.*)/s);
+        if (match) {
+          const type = match[1].toLowerCase();
+          const title = match[2].split('\n')[0].trim(); // только первая строка — заголовок
+          const bodyText = match[2].split('\n').slice(1).join('\n').trim(); // остальное — тело
+
+          const styles: Record<string, { border: string; background: string; label: string }> = {
+            attention: { border: '#f59e0b', background: '#fffbeb', label: '⚠ Важно' },
+            summary:   { border: '#3b82f6', background: '#eff6ff', label: '📋 Кратко' },
+            note:      { border: '#8b5cf6', background: '#f5f3ff', label: '📝 Примечание' },
+            warning:   { border: '#ef4444', background: '#fef2f2', label: '🚨 Предупреждение' },
+          };
+
+          const s = styles[type] ?? { border: '#6b7280', background: '#f9fafb', label: type };
+
+          return (
+            <div style={{
+              borderLeft: `4px solid ${s.border}`,
+              background: s.background,
+              borderRadius: '0 6px 6px 0',
+              padding: '12px 16px',
+              margin: '1rem 0',
+            }}>
+              <div style={{ fontWeight: 500, marginBottom: bodyText ? 8 : 0 }}>
+                {title || s.label}
+              </div>
+              {bodyText && <p style={{ margin: 0 }}>{bodyText}</p>}
+            </div>
+          );
+        }
+      }
+
+      return <blockquote>{children}</blockquote>;
+    },
+  };
+
   // --- Рендер ---
   return (
     <OlympAppLayout>
@@ -174,7 +260,12 @@ export function LessonPage() {
               ) : mdContent !== null ? (
                 // MD-файл загружен — рендерим через ReactMarkdown
                 <div className={proseLesson}>
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{mdContent}</ReactMarkdown>
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={components}
+                  >
+                    {mdContent}
+                  </ReactMarkdown>
                 </div>
               ) : lesson.contentHtml ? (
                 // Fallback — HTML из post_content
