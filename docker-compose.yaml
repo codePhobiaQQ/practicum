@@ -54,6 +54,8 @@ services:
       - db
       - elasticsearch
     image: wordpress:latest
+    entrypoint: ['bash', '-c']
+    command: ['a2enmod headers && exec docker-entrypoint.sh apache2-foreground']
     ports:
       - '9091:80'
     restart: always

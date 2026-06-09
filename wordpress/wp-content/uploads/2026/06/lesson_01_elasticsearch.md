@@ -30,7 +30,6 @@ Cluster: my-cluster
     ├── Shard 2 (Primary)
     └── Shard 1 (Replica)
 ```
-
 ---
 
 ## 2. Создание индекса с маппингом
